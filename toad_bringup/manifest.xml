@@ -1,0 +1,18 @@
+<package>
+  <description brief="toad_bringup">
+
+     Launch files etc.
+
+  </description>
+  <author>Zdenek Materna (imaterna@fit.vutbr.cz)</author>
+  <license>GPL</license>
+  <review status="unreviewed" notes=""/>
+  <url>https://github.com/robofit/toad</url>
+  <depend package="p2os_driver"/>
+  <depend package="p2os_launch"/>
+  <depend package="p2os_urdf"/>
+  <depend package="turtlebot_teleop"/>
+
+</package>
+
+
