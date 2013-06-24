@@ -1,11 +1,13 @@
 <?xml version="1.0"?>
 <launch>
   
-  <node name="gazebo" pkg="gazebo" type="gazebo" args="$(find toad_gazebo)/worlds/empty.world" respawn="false" output="screen"/>
-
-  <param name="robot_model" textfile="$(find toad_gazebo)/models/model.sdf" />
-  <node name="spawn_robot1" pkg="gazebo" type="spawn_model" args="-gazebo -param robot_model -model myrobot" respawn="false" output="screen" />
+  <!-- this must be uploaded anyway -->
+  <param name="robot_description" command="$(find xacro)/xacro.py $(find p2os_urdf)/defs/pioneer3at.xacro" />
   
-  <node name="gazebo_gui" pkg="gazebo" type="gui" respawn="false" output="screen"/>
+  <include file="$(find gazebo_ros)/launch/empty_world.launch" />
+  
+  <!-- spawn robot using urdf description -->
+  <node name="spawn_robot_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model pioneer3at" respawn="false" output="screen" />
+  
   
 </launch>

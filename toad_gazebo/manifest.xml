@@ -8,8 +8,9 @@
   <license>GPL</license>
   <review status="unreviewed" notes=""/>
   <url>https://github.com/ZdenekM/p3at_common</url>
-  <depend package="gazebo"/>
-  <depend package="gazebo_worlds"/>
+  <depend package="gazebo_ros"/>
+  <depend package="gazebo_plugins"/>
+  <depend package="gazebo_msgs"/>
 
 </package>
 
