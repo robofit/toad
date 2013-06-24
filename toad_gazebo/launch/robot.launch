@@ -6,4 +6,6 @@
   <param name="robot_model" textfile="$(find toad_gazebo)/models/model.sdf" />
   <node name="spawn_robot1" pkg="gazebo" type="spawn_model" args="-gazebo -param robot_model -model myrobot" respawn="false" output="screen" />
   
+  <node name="gazebo_gui" pkg="gazebo" type="gui" respawn="false" output="screen"/>
+  
 </launch>
