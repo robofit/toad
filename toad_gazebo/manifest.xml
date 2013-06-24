@@ -1,0 +1,16 @@
+<package>
+  <description brief="toad_gazebo">
+
+     Launch files etc.
+
+  </description>
+  <author>Zdenek Materna (imaterna@fit.vutbr.cz)</author>
+  <license>GPL</license>
+  <review status="unreviewed" notes=""/>
+  <url>https://github.com/ZdenekM/p3at_common</url>
+  <depend package="gazebo"/>
+  <depend package="gazebo_worlds"/>
+
+</package>
+
+
