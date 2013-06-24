@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+  
+  <node name="gazebo" pkg="gazebo" type="gazebo" args="$(find toad_gazebo)/worlds/empty.world" respawn="false" output="screen"/>
+
+  <param name="robot_model" textfile="$(find toad_gazebo)/models/model.sdf" />
+  <node name="spawn_robot1" pkg="gazebo" type="spawn_model" args="-gazebo -param robot_model -model myrobot" respawn="false" output="screen" />
+  
+</launch>
