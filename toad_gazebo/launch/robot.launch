@@ -1,11 +1,25 @@
 <?xml version="1.0"?>
 <launch>
   
-  <node name="gazebo" pkg="gazebo" type="gazebo" args="$(find toad_gazebo)/worlds/empty.world" respawn="false" output="screen"/>
-
-  <param name="robot_model" textfile="$(find toad_gazebo)/models/model.sdf" />
-  <node name="spawn_robot1" pkg="gazebo" type="spawn_model" args="-gazebo -param robot_model -model myrobot" respawn="false" output="screen" />
+  <!-- upload URDF description -->
+  <include file="$(find toad_description)/launch/upload.launch" />
   
-  <node name="gazebo_gui" pkg="gazebo" type="gui" respawn="false" output="screen"/>
+  <!-- publish TFs for static links -->
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+
+    <param name="publish_frequency" type="double" value="30.0"/>
+    <param name="tf_prefix" type="string" value=""/>
+ 
+  </node>
+
+  <!-- is it necessary??? -->
+	<node pkg="p2os_urdf" type="publisher" name="publisher"/>
+  
+  <!-- start Gazebo (TODO: add arguments) -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch" />
+  
+  <!-- spawn robot using urdf description -->
+  <node name="spawn_robot_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model toad" respawn="false" output="screen" />
+  
   
 </launch>

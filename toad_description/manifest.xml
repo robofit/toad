@@ -1,5 +1,5 @@
 <package>
-  <description brief="toad_gazebo">
+  <description brief="toad_description">
 
      URDF
 
@@ -8,9 +8,8 @@
   <license>GPL</license>
   <review status="unreviewed" notes=""/>
   <url>https://github.com/ZdenekM/p3at_common</url>
-  <depend package="gazebo_ros"/>
-  <depend package="gazebo_plugins"/>
-  <depend package="gazebo_msgs"/>
+  <depend package="urdf"/>
+  <depend package="xacro"/>
 
 </package>
 
