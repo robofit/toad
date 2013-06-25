@@ -1,13 +1,25 @@
 <?xml version="1.0"?>
 <launch>
   
-  <!-- this must be uploaded anyway -->
-  <param name="robot_description" command="$(find xacro)/xacro.py $(find p2os_urdf)/defs/pioneer3at.xacro" />
+  <!-- upload URDF description -->
+  <include file="$(find toad_description)/launch/upload.launch" />
   
+  <!-- publish TFs for static links -->
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+
+    <param name="publish_frequency" type="double" value="30.0"/>
+    <param name="tf_prefix" type="string" value=""/>
+ 
+  </node>
+
+  <!-- is it necessary??? -->
+	<node pkg="p2os_urdf" type="publisher" name="publisher"/>
+  
+  <!-- start Gazebo (TODO: add arguments) -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch" />
   
   <!-- spawn robot using urdf description -->
-  <node name="spawn_robot_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model pioneer3at" respawn="false" output="screen" />
+  <node name="spawn_robot_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model toad" respawn="false" output="screen" />
   
   
 </launch>
