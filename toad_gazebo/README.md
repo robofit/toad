@@ -7,7 +7,7 @@ Simulation includes:
 
 * robot base (listens to cmd_vel, publishes odometry)
 * stereo camera
-* velodyne (not working right yet)
+* velodyne (not working yet)
 * GPS
 * IMU
 
