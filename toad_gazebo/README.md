@@ -3,6 +3,14 @@ toad_gazebo
 
 Simulation of Toad, an outdoor robot.
 
+Simulation includes:
+
+* robot base (listens to cmd_vel, publishes odometry)
+* stereo camera
+* velodyne (not working right yet)
+* GPS
+* IMU
+
 Requirements:
 
 * standalone version of Gazebo (http://gazebosim.org/wiki/1.6/install#Compiling_From_Source)
