@@ -61,8 +61,9 @@ gazebo
 
 ```bash
 cd ~/ros/catkin_ws/src
+git clone -b hydro-devel https://github.com/ros-planning/navigation.git
 git clone https://github.com/ZdenekM/p2os.git
-git clone https://github.com/osrf/gazebo_ros_pkgs.git
+git clone https://github.com/ZdenekM/gazebo_ros_pkgs.git
 git clone https://github.com/ros-controls/ros_control.git
 git clone https://github.com/ros-controls/ros_controllers.git
 git clone https://github.com/ros-controls/control_toolbox.git
