@@ -92,10 +92,11 @@ source ~/ros/rosbuild_ws/setup.bash
 rosmake toad_bringup toad_gazebo
 ```
 
-* make a small workaround
+* make a small workaround (there should be some better way...)
 
 ```bash
-cp ~/rosbuild_ws/.........
+cp ~/ros/rosbuild_ws/hector_gazebo/hector_gazebo_plugins/lib/libhector_gazebo_ros_gps.so ~/ros/catkin_ws/devel/lib/
+cp ~/ros/rosbuild_ws/hector_gazebo/hector_gazebo_plugins/lib/libhector_gazebo_ros_imu.so ~/ros/catkin_ws/devel/lib/
 ```
 
 
