@@ -1,0 +1,12 @@
+<package>
+  <description brief="toad_navigation_local">
+
+  </description>
+  <author>Zdenek Materna (imaterna@fit.vutbr.cz)</author>
+  <license>LGPL</license>
+  <review status="unreviewed" notes=""/>
+  <url></url>
+
+  <depend package="move_base"/>
+  
+</package>
