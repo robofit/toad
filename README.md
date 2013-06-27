@@ -13,7 +13,7 @@ Dependencies:
 
 Installation instructions (for installing everything from scratch):
 
-* create rosbuild workspace on top of catking workspace
+* create rosbuild workspace on top of catkin workspace
 
 ```bash
 source /opt/ros/groovy/setup.sh
@@ -25,7 +25,7 @@ cd ~/ros/catkin_ws
 catkin_make
 mkdir ~/ros/rosbuild_ws
 cd ~/ros/rosbuild_ws
-rosws init ./ ../catkin_ws/
+rosws init ./ ../catkin_ws/devel
 source ~/ros/rosbuild_ws/setup.bash
 ```
 
@@ -45,8 +45,9 @@ mkdir build
 cd build
 cmake ../
 make -j5
-sudo make_install
+sudo make install
 echo "source /usr/local/share/gazebo/setup.sh" >> ~/.bashrc
+echo "export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH" >> ~/.bashrc
 source ~/.bashrc
 ```
 
@@ -62,7 +63,10 @@ gazebo
 cd ~/ros/catkin_ws/src
 git clone https://github.com/ZdenekM/p2os.git
 git clone https://github.com/osrf/gazebo_ros_pkgs.git
-rosdep install --from-paths src --ignore-src --rosdistro groovy -y
+git clone https://github.com/ros-controls/ros_control.git
+git clone https://github.com/ros-controls/ros_controllers.git
+git clone https://github.com/ros-controls/control_toolbox.git
+git clone https://github.com/ros-controls/realtime_tools.git
 cd ..
 catkin_make
 ```
