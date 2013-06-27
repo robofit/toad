@@ -26,4 +26,7 @@
 	  <param name="max_yawdecel" value="0.5" type="double"/>
 	</node>
 	
+	<!-- robot_pose_ekf -->
+	<include file="$(find toad_bringup)/launch/robot_pose_ekf.xml" />
+	
 </launch>

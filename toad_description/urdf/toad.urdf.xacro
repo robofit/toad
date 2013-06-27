@@ -20,6 +20,12 @@ name="toad">
 		<child link="velodyne_link"/>
 	</joint>
 	
+	<joint name="p3at_imu_joint" type="fixed">
+		<origin xyz="0 -0.2 0.5" rpy="0 0 0"/>
+		<parent link="base_link"/>
+		<child link="imu_link"/>
+	</joint>
+	
 	<joint name="p3at_left_cam_joint" type="fixed">
 		<origin xyz="0 -0.2 0.4" rpy="0 0 0"/>
 		<parent link="base_link"/>
@@ -56,6 +62,30 @@ name="toad">
 	</collision>
 	</link>
 	
+	<link name="imu_link">
+		<inertial>
+			<mass value="0.1"/>	
+			<origin xyz="0 0 0"/>
+			<inertia ixx="1.0" ixy="0.0" ixz="0.0"
+				 iyy="1.0" iyz="0.0" izz="1.0"/>
+  	 	</inertial>
+	<visual name="imu_vis">
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<geometry>
+			<box size="0.01 .01 .01"/>
+		</geometry>
+		<material name="imuBlack">
+        <color rgba="0.9 0.9 0.9 1"/>
+    </material>
+	</visual>
+	<collision>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<geometry>
+			<box size="0.01 .01 .01"/>
+		</geometry>
+	</collision>
+	</link>
+	
 	
 	
 	<link name="left_cam_link">
@@ -65,7 +95,7 @@ name="toad">
 			<inertia ixx="1.0" ixy="0.0" ixz="0.0"
 				 iyy="1.0" iyz="0.0" izz="1.0"/>
   	 	</inertial>
-	<visual>
+	<visual name="lcvis">
 		<origin xyz="0 0 0" rpy="0 0 0"/>
 		<geometry>
 			<box size="0.025 .05 .05"/>
@@ -89,7 +119,7 @@ name="toad">
 			<inertia ixx="1.0" ixy="0.0" ixz="0.0"
 				 iyy="1.0" iyz="0.0" izz="1.0"/>
   	 	</inertial>
-	<visual>
+	<visual name="rcvis">
 		<origin xyz="0 0 0" rpy="0 0 0"/>
 		<geometry>
 			<box size="0.025 .05 .05"/>
@@ -105,6 +135,35 @@ name="toad">
 		</geometry>
 	</collision>
 	</link>
+	
+	<gazebo>
+	
+	<plugin name="imu_sim" filename="libhector_gazebo_ros_imu.so">
+      <updateRate>20.0</updateRate>
+      <bodyName>base_link</bodyName>
+      <topicName>/imu_3dm_node/imu/data</topicName>
+      <rpyOffsets>0 0 0</rpyOffsets> <!-- deprecated -->
+      <gaussianNoise>0</gaussianNoise>  <!-- deprecated -->
+      <accelDrift>0.5 0.5 0.5</accelDrift>
+      <accelGaussianNoise>0.35 0.35 0.3</accelGaussianNoise>
+      <rateDrift>0.1 0.1 0.1</rateDrift>
+      <rateGaussianNoise>0.05 0.05 0.015</rateGaussianNoise>
+      <headingDrift>0.1</headingDrift>
+      <headingGaussianNoise>0.05</headingGaussianNoise>
+    </plugin>
+    
+    <plugin name="gps_sim" filename="libhector_gazebo_ros_gps.so">
+      <updateRate>10.0</updateRate>
+      <bodyName>base_link</bodyName>
+      <topicName>/imu_3dm_node/nav/fix</topicName>
+      <velocityTopicName>/imu_3dm_node/nav/fix_velocity</velocityTopicName>
+      <drift>5.0 5.0 5.0</drift>
+      <gaussianNoise>0.01 0.01 0.01</gaussianNoise>
+      <velocityDrift>0 0 0</velocityDrift>
+      <velocityGaussianNoise>0.05 0.05 0.05</velocityGaussianNoise>
+    </plugin>
+	
+	</gazebo>
   
   <gazebo reference="left_cam_link">
     <sensor type="multicamera" name="stereo_camera">
