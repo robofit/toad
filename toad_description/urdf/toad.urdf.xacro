@@ -208,7 +208,7 @@ name="toad">
         <alwaysOn>true</alwaysOn>
         <updateRate>0.0</updateRate>
         <cameraName>stereo</cameraName>
-        <imageTopicName>image_color</imageTopicName>
+        <imageTopicName>image_raw</imageTopicName>
         <cameraInfoTopicName>camera_info</cameraInfoTopicName>
         <frameName>left_cam_link</frameName>
         <rightFrameName>right_cam_link</rightFrameName>

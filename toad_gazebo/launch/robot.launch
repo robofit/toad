@@ -23,5 +23,10 @@
   
   <!-- robot_pose_ekf -->
 	<include file="$(find toad_bringup)/launch/robot_pose_ekf.xml" />
+	
+	<!--include file="$(find toad_bringup)/launch/stereo_proc.xml" ns="/stereo">
+	  <arg name="manager" value="/stereo/nodelet_manager"/>
+	
+	</include-->
   
 </launch>
