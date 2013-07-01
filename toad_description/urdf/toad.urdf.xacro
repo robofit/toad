@@ -178,7 +178,7 @@ name="toad">
         </image>
         <clip>
           <near>0.02</near>
-          <far>300</far>
+          <far>100</far>
         </clip>
         <noise>
           <type>gaussian</type>
@@ -196,7 +196,7 @@ name="toad">
         </image>
         <clip>
           <near>0.02</near>
-          <far>300</far>
+          <far>100</far>
         </clip>
         <noise>
           <type>gaussian</type>
@@ -212,7 +212,7 @@ name="toad">
         <cameraInfoTopicName>camera_info</cameraInfoTopicName>
         <frameName>left_cam_link</frameName>
         <rightFrameName>right_cam_link</rightFrameName>
-        <hackBaseline>0.0</hackBaseline>
+        <hackBaseline>0.4</hackBaseline>
         <distortionK1>0.0</distortionK1>
         <distortionK2>0.0</distortionK2>
         <distortionK3>0.0</distortionK3>

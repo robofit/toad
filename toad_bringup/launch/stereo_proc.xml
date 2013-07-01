@@ -11,13 +11,13 @@
   <arg unless="$(arg respawn)" name="bond" value="--no-bond" />
 
   <!-- Disparity image -->
-  <node pkg="nodelet" type="nodelet" name="disparity"
+  <!--node pkg="nodelet" type="nodelet" name="disparity"
         args="load stereo_image_proc/disparity $(arg manager) $(arg bond)"
-	respawn="$(arg respawn)" />
+	respawn="$(arg respawn)" /-->
 
   <!-- Point cloud, PCL-friendly -->
   <node pkg="nodelet" type="nodelet" name="point_cloud2"
         args="load stereo_image_proc/point_cloud2 $(arg manager) $(arg bond)"
 	respawn="$(arg respawn)" />
-
+	
 </launch>
