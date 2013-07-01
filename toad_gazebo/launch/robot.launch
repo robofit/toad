@@ -16,12 +16,29 @@
 	<node pkg="p2os_urdf" type="publisher" name="publisher"/>
   
   <!-- start Gazebo (TODO: add arguments) -->
-  <include file="$(find gazebo_ros)/launch/empty_world.launch" />
+  <!--include file="$(find gazebo_ros)/launch/empty_world.launch" /-->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find toad_gazebo)/env/pavements.sdf"/> <!-- Note: the world_name is with respect to GAZEBO_RESOURCE_PATH environmental variable -->
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
   
   <!-- spawn robot using urdf description -->
   <node name="spawn_robot_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model toad" respawn="false" output="screen" />
   
   <!-- robot_pose_ekf -->
 	<include file="$(find toad_bringup)/launch/robot_pose_ekf.xml" />
+	
+	<!--include file="$(find toad_bringup)/launch/stereo_proc.xml">
+	  <arg name="manager" value="/stereo/nodelet_manager"/>
+	</include-->
+	
+	<node name="stereo_image_proc" pkg="stereo_image_proc" type="stereo_image_proc" ns="/stereo">
+	  <param name="disparity_range" type="int" value="128"/>
+    <param name="approximate_sync" type="bool" value="false"/>
+	</node>
   
 </launch>

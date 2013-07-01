@@ -1,0 +1,454 @@
+<?xml version='1.0'?>
+<sdf version='1.4'>
+  <world name='default'>
+    <light name='sun' type='directional'>
+      <cast_shadows>1</cast_shadows>
+      <pose>0.000000 0.000000 10.000000 0.000000 0.000000 0.000000</pose>
+      <diffuse>0.800000 0.800000 0.800000 1.000000</diffuse>
+      <specular>0.200000 0.200000 0.200000 1.000000</specular>
+      <attenuation>
+        <range>1000.000000</range>
+        <constant>0.900000</constant>
+        <linear>0.010000</linear>
+        <quadratic>0.001000</quadratic>
+      </attenuation>
+      <direction>0.500000 0.100000 -0.900000</direction>
+    </light>
+    
+  <include>
+    <uri>model://ground_plane</uri>
+    <name>ground_plane</name>
+    <pose>0 0 0   0 0 0</pose>
+  </include>
+  
+      <physics type='ode'>
+      <max_step_size>0.001000</max_step_size>
+      <real_time_factor>1.000000</real_time_factor>
+      <real_time_update_rate>1000.000000</real_time_update_rate>
+      <gravity>0.000000 0.000000 -9.800000</gravity>
+      <max_contacts>20</max_contacts>
+    </physics>
+    <scene>
+      <ambient>0.400000 0.400000 0.400000 1.000000</ambient>
+      <background>0.700000 0.700000 0.700000 1.000000</background>
+      <shadows>1</shadows>
+    </scene>
+  
+    <state world_name='default'>
+      <sim_time>0 0</sim_time>
+      <real_time>0 207512</real_time>
+      <wall_time>1372662656 276170409</wall_time>
+    </state>
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose>3.082640 -6.458740 2.425810 0.000000 0.367643 2.028200</pose>
+        <view_controller>orbit</view_controller>
+      </camera>
+    </gui>
+  
+  <!-- road segment ******************************    -->  
+  <include>
+    <uri>model://pavement_plane</uri>
+    <name>pavement_plane_0</name>
+    <pose>0 0 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_0_0</name>
+    <pose>0 -1 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_0_1</name>
+    <pose>0 2 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_0_2</name>
+    <pose>0 1 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_0_3</name>
+    <pose>0 -2 0   0 0 0</pose>
+  </include>
+    
+    
+  <!-- road segment ******************************    -->  
+  <include>
+    <uri>model://pavement_plane</uri>
+    <name>pavement_plane_1</name>
+    <pose>1 0 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_1_0</name>
+    <pose>1 -1 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_1_1</name>
+    <pose>1 2 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_1_2</name>
+    <pose>1 1 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_1_3</name>
+    <pose>1 -2 0   0 0 0</pose>
+  </include>
+  
+  <!-- road segment ******************************    -->  
+  <include>
+    <uri>model://pavement_plane</uri>
+    <name>pavement_plane_2</name>
+    <pose>2 0 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_2_0</name>
+    <pose>2 -1 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_2_1</name>
+    <pose>2 2 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_2_2</name>
+    <pose>2 1 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_2_3</name>
+    <pose>2 -2 0   0 0 0</pose>
+  </include>
+  
+  <!-- road segment ******************************    -->  
+  <include>
+    <uri>model://pavement_plane</uri>
+    <name>pavement_plane_3</name>
+    <pose>3 0 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_3_0</name>
+    <pose>3 -1 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_3_1</name>
+    <pose>3 2 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_3_2</name>
+    <pose>3 1 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_3_3</name>
+    <pose>3 -2 0   0 0 0</pose>
+  </include>
+  
+  <!-- road segment ******************************    -->  
+  <include>
+    <uri>model://pavement_plane</uri>
+    <name>pavement_plane_4</name>
+    <pose>4 0 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_4_0</name>
+    <pose>4 -1 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_4_1</name>
+    <pose>4 2 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_4_2</name>
+    <pose>4 1 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_4_3</name>
+    <pose>4 -2 0   0 0 0</pose>
+  </include>
+  
+  <!-- road segment ******************************    -->  
+  <include>
+    <uri>model://pavement_plane</uri>
+    <name>pavement_plane_5</name>
+    <pose>5 0 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_5_0</name>
+    <pose>5 -1 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_5_1</name>
+    <pose>5 2 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_5_2</name>
+    <pose>5 1 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_5_3</name>
+    <pose>5 -2 0   0 0 0</pose>
+  </include>
+  
+  <!-- road segment ******************************    -->  
+  <include>
+    <uri>model://pavement_plane</uri>
+    <name>pavement_plane_6</name>
+    <pose>6 0 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_6_0</name>
+    <pose>6 -1 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_6_1</name>
+    <pose>6 2 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_6_2</name>
+    <pose>6 1 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_6_3</name>
+    <pose>6 -2 0   0 0 0</pose>
+  </include>
+  
+  <!-- road segment ******************************    -->  
+  <include>
+    <uri>model://pavement_plane</uri>
+    <name>pavement_plane_7</name>
+    <pose>7 0 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_7_0</name>
+    <pose>7 -1 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_7_1</name>
+    <pose>7 2 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_7_2</name>
+    <pose>7 1 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_7_3</name>
+    <pose>7 -2 0   0 0 0</pose>
+  </include>
+  
+  <!-- road segment ******************************    -->  
+  <include>
+    <uri>model://pavement_plane</uri>
+    <name>pavement_plane_8</name>
+    <pose>8 0 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_8_0</name>
+    <pose>8 -1 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_8_1</name>
+    <pose>8 2 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_8_2</name>
+    <pose>8 1 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_8_3</name>
+    <pose>8 -2 0   0 0 0</pose>
+  </include>
+  
+  <!-- road segment ******************************    -->  
+  <include>
+    <uri>model://pavement_plane</uri>
+    <name>pavement_plane_9</name>
+    <pose>9 0 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://pavement_plane</uri>
+    <name>pavement_plane_9_0</name>
+    <pose>9 -1 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://pavement_plane</uri>
+    <name>pavement_plane_9_1</name>
+    <pose>9 2 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://pavement_plane</uri>
+    <name>pavement_plane_9_2</name>
+    <pose>9 1 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://pavement_plane</uri>
+    <name>pavement_plane_9_3</name>
+    <pose>9 -2 0   0 0 0</pose>
+  </include>
+  
+  <!-- road segment ******************************    -->  
+  <include>
+    <uri>model://pavement_plane</uri>
+    <name>pavement_plane_10</name>
+    <pose>10 0 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_10_0</name>
+    <pose>10 -1 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_10_1</name>
+    <pose>10 2 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_10_2</name>
+    <pose>10 1 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_10_3</name>
+    <pose>10 -2 0   0 0 0</pose>
+  </include>
+  
+  <!-- road segment ******************************    -->  
+  <include>
+    <uri>model://pavement_plane</uri>
+    <name>pavement_plane_11</name>
+    <pose>11 0 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_11_0</name>
+    <pose>11 -1 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_11_1</name>
+    <pose>11 2 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_11_2</name>
+    <pose>11 1 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_11_3</name>
+    <pose>11 -2 0   0 0 0</pose>
+  </include>
+  
+  <!-- road segment ******************************    -->  
+  <include>
+    <uri>model://pavement_plane</uri>
+    <name>pavement_plane_12</name>
+    <pose>12 0 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_12_0</name>
+    <pose>12 -1 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_12_1</name>
+    <pose>12 2 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_12_2</name>
+    <pose>12 1 0   0 0 0</pose>
+  </include>
+  
+  <include>
+    <uri>model://grass_plane</uri>
+    <name>grass_plane_12_3</name>
+    <pose>12 -2 0   0 0 0</pose>
+  </include>
+
+  </world>
+</sdf>
