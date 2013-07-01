@@ -15,3 +15,5 @@ rosbuild_init()
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 #rosbuild_add_executable(LMS100 src/LMS1xx_node.cpp)
 #rosbuild_add_executable(set_config src/setConfig.cpp)
+
+#file(COPY ${PROJECT_SOURCE_DIR}/models DESTINATION ~/.gazebo)
