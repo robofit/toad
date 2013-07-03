@@ -6,8 +6,9 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
-        - /Stereo/Cloud1/Status1
-      Splitter Ratio: 0.5
+        - /TF1/Frames1
+        - /TF1/Tree1
+      Splitter Ratio: 0.621019
     Tree Height: 409
   - Class: rviz/Selection
     Name: Selection
@@ -192,7 +193,7 @@ Visualization Manager:
       Channel Name: intensity
       Class: rviz/PointCloud2
       Color: 255; 255; 255
-      Color Transformer: ""
+      Color Transformer: RGB8
       Decay Time: 0
       Enabled: true
       Max Color: 255; 255; 255
@@ -200,7 +201,7 @@ Visualization Manager:
       Min Color: 0; 0; 0
       Min Intensity: 0
       Name: Stereo/Cloud
-      Position Transformer: ""
+      Position Transformer: XYZ
       Queue Size: 10
       Selectable: true
       Size (Pixels): 3
@@ -261,6 +262,69 @@ Visualization Manager:
       Name: mb/Global Plan
       Topic: /move_base/TrajectoryPlannerROS/global_plan
       Value: true
+    - Class: rviz/TF
+      Enabled: true
+      Frame Timeout: 15
+      Frames:
+        /back_sonar:
+          Value: false
+        /base_footprint:
+          Value: false
+        /base_link:
+          Value: true
+        /front_sonar:
+          Value: false
+        /imu_link:
+          Value: false
+        /left_cam_link:
+          Value: false
+        /left_cam_optical_link:
+          Value: false
+        /odom:
+          Value: false
+        /p3at_back_left_axle:
+          Value: false
+        /p3at_back_left_hub:
+          Value: false
+        /p3at_back_right_axle:
+          Value: false
+        /p3at_back_right_hub:
+          Value: false
+        /p3at_front_left_axle:
+          Value: false
+        /p3at_front_left_hub:
+          Value: false
+        /p3at_front_right_axle:
+          Value: false
+        /p3at_front_right_hub:
+          Value: false
+        /right_cam_link:
+          Value: false
+        /right_cam_optical_link:
+          Value: false
+        /top_plate:
+          Value: false
+        /velodyne_link:
+          Value: false
+        All Enabled: false
+      Marker Scale: 1
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: true
+      Tree:
+        /odom:
+          /base_footprint:
+            {}
+      Update Interval: 0
+      Value: true
+    - Alpha: 0.7
+      Class: rviz/Map
+      Draw Behind: false
+      Enabled: true
+      Name: mb/Costmap
+      Topic: /move_base/local_costmap/costmap
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -284,17 +348,17 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 4.0747
+      Distance: 8.00731
       Focal Point:
-        X: -0.248334
-        Y: 0.3695
-        Z: 0.869811
+        X: 1.65845
+        Y: -0.562561
+        Z: -0.6805
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 0.885398
+      Pitch: 1.0598
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 1.68546
+      Yaw: 3.44862
     Saved: ~
 Window Geometry:
   Displays:
