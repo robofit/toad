@@ -13,6 +13,13 @@ Dependencies:
 
 Installation instructions (for installing everything from scratch):
 
+* install some dependencies:
+
+```bash
+sudo apt-get install ros-groovy-gps-umd
+```
+
+
 * create rosbuild workspace on top of catkin workspace
 
 ```bash
