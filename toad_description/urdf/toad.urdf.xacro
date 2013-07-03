@@ -41,7 +41,7 @@ name="toad">
 	<link name="velodyne_link">
 		<inertial>
 			<mass value="1.0"/>	
-			<origin xyz="0 0 0"/>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
 			<inertia ixx="1.0" ixy="0.0" ixz="0.0"
 				 iyy="1.0" iyz="0.0" izz="1.0"/>
   	 	</inertial>
@@ -65,7 +65,7 @@ name="toad">
 	<link name="imu_link">
 		<inertial>
 			<mass value="0.1"/>	
-			<origin xyz="0 0 0"/>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
 			<inertia ixx="1.0" ixy="0.0" ixz="0.0"
 				 iyy="1.0" iyz="0.0" izz="1.0"/>
   	 	</inertial>
@@ -91,7 +91,7 @@ name="toad">
 	<link name="left_cam_link">
 		<inertial>
 			<mass value="0.2"/>	
-			<origin xyz="0 0 0"/>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
 			<inertia ixx="1.0" ixy="0.0" ixz="0.0"
 				 iyy="1.0" iyz="0.0" izz="1.0"/>
   	 	</inertial>
@@ -115,7 +115,7 @@ name="toad">
 	<link name="right_cam_link">
 		<inertial>
 			<mass value="0.2"/>	
-			<origin xyz="0 0 0"/>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
 			<inertia ixx="1.0" ixy="0.0" ixz="0.0"
 				 iyy="1.0" iyz="0.0" izz="1.0"/>
   	 	</inertial>
@@ -135,6 +135,22 @@ name="toad">
 		</geometry>
 	</collision>
 	</link>
+	
+	
+	<joint name="p3at_left_cam_optical_joint" type="fixed">
+		<origin xyz="0 0 0" rpy="1.57 3.14 1.57"/>
+		<parent link="left_cam_link"/>
+		<child link="left_cam_optical_link"/>
+	</joint>
+	
+	<joint name="p3at_right_cam_optical_joint" type="fixed">
+		<origin xyz="0 0 0" rpy="1.57 3.14 1.57"/>
+		<parent link="right_cam_link"/>
+		<child link="right_cam_optical_link"/>
+	</joint>
+	
+	<link name="left_cam_optical_link"/>
+	<link name="right_cam_optical_link"/>
 	
 	<gazebo>
 	
@@ -161,6 +177,8 @@ name="toad">
       <gaussianNoise>0.01 0.01 0.01</gaussianNoise>
       <velocityDrift>0 0 0</velocityDrift>
       <velocityGaussianNoise>0.05 0.05 0.05</velocityGaussianNoise>
+      <referenceLatitude>49.207387</referenceLatitude>
+      <referenceLongitude>16.609840</referenceLongitude>
     </plugin>
 	
 	</gazebo>
@@ -210,8 +228,8 @@ name="toad">
         <cameraName>stereo</cameraName>
         <imageTopicName>image_raw</imageTopicName>
         <cameraInfoTopicName>camera_info</cameraInfoTopicName>
-        <frameName>left_cam_link</frameName>
-        <rightFrameName>right_cam_link</rightFrameName>
+        <frameName>left_cam_optical_link</frameName>
+        <rightFrameName>right_cam_optical_link</rightFrameName>
         <hackBaseline>0.4</hackBaseline>
         <distortionK1>0.0</distortionK1>
         <distortionK2>0.0</distortionK2>

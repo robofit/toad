@@ -17,3 +17,6 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 #rosbuild_add_executable(set_config src/setConfig.cpp)
 
 #file(COPY ${PROJECT_SOURCE_DIR}/models DESTINATION ~/.gazebo)
+
+# Parse check all the launch/*.launch files
+rosbuild_add_roslaunch_check(launch)
