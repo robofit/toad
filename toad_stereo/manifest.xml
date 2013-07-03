@@ -1,0 +1,13 @@
+<package>
+  <description brief="toad_stereo">
+
+  </description>
+  <author></author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url></url>
+  <depend package="camera1394"/>
+  <depend package="stereo_image_proc"/>
+
+</package>
+
