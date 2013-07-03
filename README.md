@@ -19,6 +19,15 @@ Installation instructions (for installing everything from scratch):
 sudo apt-get install ros-groovy-gps-umd
 ```
 
+* compile libgtests (on 12.04 it's not compiled for some reason...)
+
+```bash
+cd /usr/src/gtest
+sudo cmake .
+sudo make
+sudo mv libg* /usr/lib/
+```
+
 
 * create rosbuild workspace on top of catkin workspace
 
@@ -68,6 +77,7 @@ gazebo
 
 ```bash
 cd ~/ros/catkin_ws/src
+git clone https://github.com/ethz-asl/map_msgs
 git clone -b hydro-devel https://github.com/ros-planning/navigation.git
 git clone https://github.com/ZdenekM/p2os.git
 git clone https://github.com/ZdenekM/gazebo_ros_pkgs.git
