@@ -185,7 +185,7 @@ name="toad">
   
   <gazebo reference="left_cam_link">
     <sensor type="multicamera" name="stereo_camera">
-      <update_rate>30.0</update_rate>
+      <update_rate>15.0</update_rate>
       <camera name="left">
         <pose>0 0 0 0 0 0</pose>
         <horizontal_fov>0.733038285</horizontal_fov>
@@ -195,8 +195,8 @@ name="toad">
           <format>R8G8B8</format>
         </image>
         <clip>
-          <near>0.02</near>
-          <far>100</far>
+          <near>0.1</near>
+          <far>30.0</far>
         </clip>
         <noise>
           <type>gaussian</type>
@@ -213,8 +213,8 @@ name="toad">
           <format>R8G8B8</format>
         </image>
         <clip>
-          <near>0.02</near>
-          <far>100</far>
+          <near>0.1</near>
+          <far>30.0</far>
         </clip>
         <noise>
           <type>gaussian</type>
