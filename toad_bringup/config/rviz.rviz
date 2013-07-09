@@ -70,6 +70,11 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        hokuyo_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         imu_link:
           Alpha: 1
           Show Axes: false
@@ -263,49 +268,9 @@ Visualization Manager:
       Topic: /move_base/TrajectoryPlannerROS/global_plan
       Value: true
     - Class: rviz/TF
-      Enabled: true
+      Enabled: false
       Frame Timeout: 15
       Frames:
-        /back_sonar:
-          Value: false
-        /base_footprint:
-          Value: false
-        /base_link:
-          Value: true
-        /front_sonar:
-          Value: false
-        /imu_link:
-          Value: false
-        /left_cam_link:
-          Value: false
-        /left_cam_optical_link:
-          Value: false
-        /odom:
-          Value: false
-        /p3at_back_left_axle:
-          Value: false
-        /p3at_back_left_hub:
-          Value: false
-        /p3at_back_right_axle:
-          Value: false
-        /p3at_back_right_hub:
-          Value: false
-        /p3at_front_left_axle:
-          Value: false
-        /p3at_front_left_hub:
-          Value: false
-        /p3at_front_right_axle:
-          Value: false
-        /p3at_front_right_hub:
-          Value: false
-        /right_cam_link:
-          Value: false
-        /right_cam_optical_link:
-          Value: false
-        /top_plate:
-          Value: false
-        /velodyne_link:
-          Value: false
         All Enabled: false
       Marker Scale: 1
       Name: TF
@@ -313,11 +278,9 @@ Visualization Manager:
       Show Axes: true
       Show Names: true
       Tree:
-        /odom:
-          /base_footprint:
-            {}
+        {}
       Update Interval: 0
-      Value: true
+      Value: false
     - Alpha: 0.7
       Class: rviz/Map
       Draw Behind: false
@@ -325,10 +288,38 @@ Visualization Manager:
       Name: mb/Costmap
       Topic: /move_base/local_costmap/costmap
       Value: true
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 10
+        Min Value: -10
+        Value: true
+      Axis: Z
+      Channel Name: intensities
+      Class: rviz/LaserScan
+      Color: 255; 255; 255
+      Color Transformer: FlatColor
+      Decay Time: 0
+      Enabled: true
+      Max Color: 255; 255; 255
+      Max Intensity: 0
+      Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: Hokuyo
+      Position Transformer: XYZ
+      Queue Size: 10
+      Selectable: true
+      Size (Pixels): 3
+      Size (m): 0.01
+      Style: Flat Squares
+      Topic: /scan
+      Use Fixed Frame: true
+      Use rainbow: false
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: /base_link
+    Fixed Frame: /odom
   Name: root
   Tools:
     - Class: rviz/Interact
@@ -348,17 +339,17 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 8.00731
+      Distance: 4.71927
       Focal Point:
-        X: 1.65845
-        Y: -0.562561
-        Z: -0.6805
+        X: 0.389297
+        Y: 0.238307
+        Z: -0.240828
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 1.0598
+      Pitch: 0.4648
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 3.44862
+      Yaw: 3.8086
     Saved: ~
 Window Geometry:
   Displays:

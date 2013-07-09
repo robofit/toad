@@ -7,7 +7,9 @@
 name="toad">
 
   <include filename="$(find p2os_urdf)/defs/pioneer3at_body.xacro"/>
-  
+  <!--include filename="$(find hector_sensors_description)/urdf/hokuyo_utm30lx.urdf.xacro"/-->
+  <include filename="$(find toad_description)/urdf/hokuyo_utm30lx.urdf.xacro"/>
+    
   <xacro:p3at_front suffix="left" reflect="1"/>
   <xacro:p3at_front suffix="right" reflect="-1"/>
   <xacro:p3at_back suffix="left" reflect="1"/>
@@ -152,6 +154,11 @@ name="toad">
 	<link name="left_cam_optical_link"/>
 	<link name="right_cam_optical_link"/>
 	
+	<!-- Hokuyo UTM-30LX mounted upside down -->
+	<xacro:hokuyo_utm30lx name="hokuyo" parent="base_link" ros_topic="/scan" update_rate="10" ray_count="1080" min_angle="-135" max_angle="135">
+  	<origin xyz="0.32 0.0 0.2" rpy="${M_PI} 0 0"/>
+	</xacro:hokuyo_utm30lx>
+	
 	<gazebo>
 	
 	<plugin name="imu_sim" filename="libhector_gazebo_ros_imu.so">
@@ -185,7 +192,7 @@ name="toad">
   
   <gazebo reference="left_cam_link">
     <sensor type="multicamera" name="stereo_camera">
-      <update_rate>30.0</update_rate>
+      <update_rate>5.0</update_rate>
       <camera name="left">
         <pose>0 0 0 0 0 0</pose>
         <horizontal_fov>0.733038285</horizontal_fov>
@@ -195,8 +202,8 @@ name="toad">
           <format>R8G8B8</format>
         </image>
         <clip>
-          <near>0.02</near>
-          <far>100</far>
+          <near>0.1</near>
+          <far>30.0</far>
         </clip>
         <noise>
           <type>gaussian</type>
@@ -213,8 +220,8 @@ name="toad">
           <format>R8G8B8</format>
         </image>
         <clip>
-          <near>0.02</near>
-          <far>100</far>
+          <near>0.1</near>
+          <far>30.0</far>
         </clip>
         <noise>
           <type>gaussian</type>
@@ -241,7 +248,7 @@ name="toad">
   </gazebo>
   
  <gazebo reference="velodyne_link">
-    <sensor type="gpu_ray" name="head_hokuyo_sensor">
+    <sensor type="gpu_ray" name="velodyne">
       <pose>0 0 0 0 0 0</pose>
       <visualize>false</visualize>
       <update_rate>10</update_rate>
@@ -255,8 +262,8 @@ name="toad">
           </horizontal>
         </scan>
         <range>
-          <min>1.0</min>
-          <max>10.0</max>
+          <min>0.3</min>
+          <max>5.0</max>
           <resolution>0.01</resolution>
         </range>
         <noise>

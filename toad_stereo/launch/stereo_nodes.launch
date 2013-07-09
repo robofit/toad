@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<launch>
+
+<group ns="stereo" >
+
+  <node pkg="camera1394" type="camera1394_node" name="camera1394_left_node" output="screen">
+    <remap from="camera" to="left"/>
+    <param name="guid" value="08144361026323d8" />
+    <param name="frame_id" value="left_cam_link" />
+    <param name="camera_info_url" value="$(find toad_stereo)/config/left_calib.yaml" />
+    <rosparam command="load" file="$(find toad_stereo)/config/cam_common.yaml" />
+  </node>
+  
+  <node pkg="camera1394" type="camera1394_node" name="camera1394_right_node" output="screen">
+    <remap from="camera" to="right"/>
+    <param name="guid" value="0814436102632744" />
+    <param name="frame_id" value="right_cam_link" />
+    <param name="camera_info_url" value="$(find toad_stereo)/config/right_calib.yaml" />
+    <rosparam command="load" file="$(find toad_stereo)/config/cam_common.yaml" />
+  </node>
+  
+  <node name="stereo_image_proc" pkg="stereo_image_proc" type="stereo_image_proc" output="screen">
+    <param name="disparity_range" value="128"/>
+    <param name="approximate_sync" value="true"/>
+  </node>
+
+</group>
+
+</launch>
