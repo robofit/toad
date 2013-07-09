@@ -8,6 +8,7 @@ inflation_radius: 1.0
 footprint: [[0.3,0.3],[-0.3,0.3],[-0.3,-0.3],[0.3,-0.3]]
 
 
-observation_sources: velodyne_scan
+observation_sources: velodyne_scan hokuyo_scan
 
-velodyne_scan: {sensor_frame: velodyne_link, topic: /velodyne/scan, data_type: LaserScan, marking: true, clearing: true}
+velodyne_scan: {sensor_frame: velodyne_link, topic: /velodyne/scan, data_type: LaserScan, marking: true, clearing: false}
+hokuyo_scan: {sensor_frame: hokuyo_link, topic: /scan, data_type: LaserScan, marking: true, clearing: true}

@@ -10,7 +10,7 @@
   <url>https://github.com/ZdenekM/p3at_common</url>
   <depend package="urdf"/>
   <depend package="xacro"/>
+  <!--depend package="hector_sensors_description"/-->
+  <depend package="p2os_urdf"/>
 
 </package>
-
-
