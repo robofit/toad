@@ -7,7 +7,6 @@
 name="toad">
 
   <include filename="$(find p2os_urdf)/defs/pioneer3at_body.xacro"/>
-  <!--include filename="$(find hector_sensors_description)/urdf/hokuyo_utm30lx.urdf.xacro"/-->
   <include filename="$(find toad_description)/urdf/hokuyo_utm30lx.urdf.xacro"/>
     
   <xacro:p3at_front suffix="left" reflect="1"/>
