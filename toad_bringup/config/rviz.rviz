@@ -6,12 +6,11 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
+        - /Stereo/Left1
         - /TF1/Frames1
         - /TF1/Tree1
-        - /Map1/Status1
-        - /det/asphalt1/Status1
       Splitter Ratio: 0.621019
-    Tree Height: 398
+    Tree Height: 872
   - Class: rviz/Selection
     Name: Selection
   - Class: rviz/Tool Properties
@@ -181,7 +180,7 @@ Visualization Manager:
       Value: true
     - Class: rviz/Image
       Enabled: true
-      Image Topic: /stereo/left/image_raw
+      Image Topic: /stereo/right/image_color
       Max Value: 1
       Median window: 5
       Min Value: 0
@@ -270,51 +269,9 @@ Visualization Manager:
       Topic: /move_base/TrajectoryPlannerROS/global_plan
       Value: true
     - Class: rviz/TF
-      Enabled: true
+      Enabled: false
       Frame Timeout: 15
       Frames:
-        /back_sonar:
-          Value: true
-        /base_footprint:
-          Value: true
-        /base_link:
-          Value: true
-        /front_sonar:
-          Value: true
-        /hokuyo_link:
-          Value: true
-        /imu_link:
-          Value: true
-        /left_cam_link:
-          Value: true
-        /left_cam_optical_link:
-          Value: true
-        /odom:
-          Value: true
-        /p3at_back_left_axle:
-          Value: true
-        /p3at_back_left_hub:
-          Value: true
-        /p3at_back_right_axle:
-          Value: true
-        /p3at_back_right_hub:
-          Value: true
-        /p3at_front_left_axle:
-          Value: true
-        /p3at_front_left_hub:
-          Value: true
-        /p3at_front_right_axle:
-          Value: true
-        /p3at_front_right_hub:
-          Value: true
-        /right_cam_link:
-          Value: true
-        /right_cam_optical_link:
-          Value: true
-        /top_plate:
-          Value: true
-        /velodyne_link:
-          Value: true
         All Enabled: false
       Marker Scale: 1
       Name: TF
@@ -322,41 +279,9 @@ Visualization Manager:
       Show Axes: true
       Show Names: true
       Tree:
-        /odom:
-          /base_footprint:
-            /base_link:
-              /back_sonar:
-                {}
-              /front_sonar:
-                {}
-              /hokuyo_link:
-                {}
-              /imu_link:
-                {}
-              /left_cam_link:
-                /left_cam_optical_link:
-                  {}
-              /p3at_back_left_axle:
-                /p3at_back_left_hub:
-                  {}
-              /p3at_back_right_axle:
-                /p3at_back_right_hub:
-                  {}
-              /p3at_front_left_axle:
-                /p3at_front_left_hub:
-                  {}
-              /p3at_front_right_axle:
-                /p3at_front_right_hub:
-                  {}
-              /right_cam_link:
-                /right_cam_optical_link:
-                  {}
-              /top_plate:
-                {}
-              /velodyne_link:
-                {}
+        {}
       Update Interval: 0
-      Value: true
+      Value: false
     - Alpha: 0.7
       Class: rviz/Map
       Draw Behind: false
@@ -395,12 +320,12 @@ Visualization Manager:
     - Alpha: 0.7
       Class: rviz/Map
       Draw Behind: false
-      Enabled: true
-      Name: Map
+      Enabled: false
+      Name: det/map
       Topic: /det2costmap/occ_map
-      Value: true
+      Value: false
     - Class: rviz/Image
-      Enabled: true
+      Enabled: false
       Image Topic: /detectors/not_road/sample_grass
       Max Value: 1
       Median window: 5
@@ -409,9 +334,9 @@ Visualization Manager:
       Normalize Range: true
       Queue Size: 5
       Transport Hint: raw
-      Value: true
+      Value: false
     - Class: rviz/Image
-      Enabled: true
+      Enabled: false
       Image Topic: /detectors/road/sample_asphalt
       Max Value: 1
       Median window: 5
@@ -420,6 +345,13 @@ Visualization Manager:
       Normalize Range: true
       Queue Size: 2
       Transport Hint: raw
+      Value: false
+    - Alpha: 1
+      Class: rviz/Polygon
+      Color: 0; 85; 255
+      Enabled: true
+      Name: Robot footprint
+      Topic: /move_base/local_costmap/footprint_layer/footprint_stamped
       Value: true
   Enabled: true
   Global Options:
@@ -444,25 +376,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 15.7558
+      Distance: 6.9482
       Focal Point:
-        X: 2.43651
-        Y: 1.04334
-        Z: -1.57751
+        X: 4.58721
+        Y: -1.35584
+        Z: -0.731129
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 0.879796
+      Pitch: 0.999796
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 3.10354
+      Yaw: 5.89673
     Saved: ~
 Window Geometry:
   Displays:
     collapsed: false
-  Height: 967
+  Height: 1178
   Hide Left Dock: false
   Hide Right Dock: false
-  QMainWindow State: 000000ff00000000fd00000004000000000000013c00000327fc020000000afb000000100044006900730070006c006100790073010000004100000220000000e300fffffffb0000001200530065006c0065006300740069006f006e00000001e10000009b0000006700fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb00000012006400650074002f0067007200610073007301000002670000007e0000001600fffffffb00000016006400650074002f00610073007000680061006c007401000002eb0000007d0000001600ffffff000000010000014200000327fc0200000005fb0000001600530074006500720065006f002f004c0065006600740100000041000001380000001600fffffffb0000001800530074006500720065006f002f00520069006700680074010000017f000001e90000001600fffffffb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a005600690065007700730000000041000003f3000000b300fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000500000001c9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000005000000003bfc0100000002fb0000000800540069006d00650100000000000005000000028300fffffffb0000000800540069006d00650100000000000004500000000000000000000002760000032700000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd00000004000000000000013c000003fafc020000000afb000000100044006900730070006c0061007900730100000041000003fa000000e300fffffffb0000001200530065006c0065006300740069006f006e00000001e10000009b0000006700fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb00000012006400650074002f0067007200610073007300000002670000007e0000001600fffffffb00000016006400650074002f00610073007000680061006c007400000002d2000000960000001600ffffff0000000100000142000003fafc0200000005fb0000001600530074006500720065006f002f004c00650066007401000000410000018a0000001600fffffffb0000001800530074006500720065006f002f0052006900670068007401000001d10000026a0000001600fffffffb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a005600690065007700730000000041000003f3000000b300fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000500000001c9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000006400000003bfc0100000002fb0000000800540069006d00650100000000000006400000028300fffffffb0000000800540069006d00650100000000000004500000000000000000000003b6000003fa00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Stereo/Left:
@@ -475,9 +407,9 @@ Window Geometry:
     collapsed: false
   Views:
     collapsed: false
-  Width: 1280
-  X: 0
-  Y: 35
+  Width: 1600
+  X: 1280
+  Y: 0
   det/asphalt:
     collapsed: false
   det/grass:
