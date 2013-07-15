@@ -15,6 +15,7 @@
   <depend package="robot_pose_ekf"/>
   <depend package="microstrain_3dm_gx3_45"/>
   <depend package="stereo_image_proc"/>
+  <depend package="but_velodyne"/>
 
 </package>
 
