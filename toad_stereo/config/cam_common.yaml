@@ -3,7 +3,7 @@ video_mode: 640x480_rgb8
 frame_rate: 7.5
 iso_speed: 400
 
-auto_gamma: 3           # Manual
-gamma: 2
+auto_gamma: 2           # 3 - Manual
+gamma: 2 # was 2
 auto_shutter: 2         # Auto
 auto_white_balance: 2   # Auto

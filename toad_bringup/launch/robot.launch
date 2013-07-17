@@ -18,12 +18,12 @@
 	<!-- run p2os to control the pioneer -->
 	<node pkg="p2os_driver" type="p2os_driver" name="p2os" output="screen">
 	  <param name="port" value="/dev/ttyUSB0" type="string"/>
-	  <param name="max_xspeed" value="0.25" type="double"/>
-	  <param name="max_yawspeed" value="0.25" type="double"/>
+	  <param name="max_xspeed" value="0.5" type="double"/>
+	  <param name="max_yawspeed" value="0.5" type="double"/>
 	  <param name="max_xaccel" value="0.5" type="double"/>
-	  <param name="max_xdecel" value="0.5" type="double"/>
+	  <param name="max_xdecel" value="10.0" type="double"/>
 	  <param name="max_yawaccel" value="0.5" type="double"/>
-	  <param name="max_yawdecel" value="0.5" type="double"/>
+	  <param name="max_yawdecel" value="10.0" type="double"/>
 	  <param name="publish_tf" value="false"/>
 	  <remap from="pose" to="odom"/>
 	</node>
@@ -35,7 +35,8 @@
 	<include file="$(find microstrain_3dm_gx3_45)/launch/imu.launch" />
 	
 	<!-- robot_pose_ekf -->
-	<include file="$(find toad_bringup)/launch/robot_pose_ekf.xml" />
+	<!--include file="$(find toad_bringup)/launch/robot_pose_ekf.xml" /-->
+	<include file="$(find toad_bringup)/launch/laser_scan_matcher.xml" />
 	
 	<!-- Velodyne driver -->
 	<include file="$(find but_velodyne)/launch/velodyne.launch" />
