@@ -28,20 +28,20 @@
 	  <remap from="pose" to="odom"/>
 	</node>
 	
-	<!-- Stereo (nodes) -->
-	<include file="$(find toad_stereo)/launch/stereo_nodes.launch" />
+	<!-- Stereo (nodelets / nodes) -->
+	<include file="$(find toad_stereo)/launch/stereo_nodelets.launch" />
 	
 	<!-- Microstrain IMU -->
 	<include file="$(find microstrain_3dm_gx3_45)/launch/imu.launch" />
 	
 	<!-- robot_pose_ekf -->
 	<!--include file="$(find toad_bringup)/launch/robot_pose_ekf.xml" /-->
-	<include file="$(find toad_bringup)/launch/laser_scan_matcher.xml" />
+	<include file="$(find toad_bringup)/launch/laser_scan_matcher_nodelet.xml" />
 	
 	<!-- Velodyne driver -->
 	<include file="$(find but_velodyne)/launch/velodyne.launch" />
 	
 	<!-- Velodyne cloud2scan -->
-	<include file="$(find but_velodyne)/launch/laserscan_node.launch" />
+	<include file="$(find but_velodyne)/launch/laserscan_nodelet.launch" />
 	
 </launch>
