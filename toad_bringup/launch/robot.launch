@@ -2,7 +2,7 @@
 <launch>
 
   <!-- send table.xml to param server -->
-  <param name="robot_description" command="$(find xacro)/xacro.py $(find p2os_urdf)/defs/pioneer3at.xacro" />
+  <include file="$(find toad_description)/launch/upload.launch" />
 
   <!-- publish TFs for static links -->
   <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
@@ -16,17 +16,32 @@
 	<node pkg="p2os_urdf" type="publisher" name="publisher"/>
 
 	<!-- run p2os to control the pioneer -->
-	<node pkg="p2os_driver" type="p2os" name="p2os" output="screen">
+	<node pkg="p2os_driver" type="p2os_driver" name="p2os" output="screen">
 	  <param name="port" value="/dev/ttyUSB0" type="string"/>
-	  <param name="max_xspeed" value="0.2" type="double"/>
-	  <param name="max_yawspeed" value="0.2" type="double"/>
+	  <param name="max_xspeed" value="0.5" type="double"/>
+	  <param name="max_yawspeed" value="0.5" type="double"/>
 	  <param name="max_xaccel" value="0.5" type="double"/>
-	  <param name="max_xdecel" value="0.5" type="double"/>
+	  <param name="max_xdecel" value="10.0" type="double"/>
 	  <param name="max_yawaccel" value="0.5" type="double"/>
-	  <param name="max_yawdecel" value="0.5" type="double"/>
+	  <param name="max_yawdecel" value="10.0" type="double"/>
+	  <param name="publish_tf" value="false"/>
+	  <remap from="pose" to="odom"/>
 	</node>
 	
+	<!-- Stereo (nodelets / nodes) -->
+	<include file="$(find toad_stereo)/launch/stereo_nodelets.launch" />
+	
+	<!-- Microstrain IMU -->
+	<include file="$(find microstrain_3dm_gx3_45)/launch/imu.launch" />
+	
 	<!-- robot_pose_ekf -->
-	<include file="$(find toad_bringup)/launch/robot_pose_ekf.xml" />
+	<!--include file="$(find toad_bringup)/launch/robot_pose_ekf.xml" /-->
+	<include file="$(find toad_bringup)/launch/laser_scan_matcher_nodelet.xml" />
+	
+	<!-- Velodyne driver -->
+	<include file="$(find but_velodyne)/launch/velodyne.launch" />
+	
+	<!-- Velodyne cloud2scan -->
+	<include file="$(find but_velodyne)/launch/laserscan_nodelet.launch" />
 	
 </launch>

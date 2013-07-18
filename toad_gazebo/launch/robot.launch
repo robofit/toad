@@ -36,11 +36,9 @@
   </node>
   
   <!-- robot_pose_ekf -->
-	<include file="$(find toad_bringup)/launch/robot_pose_ekf.xml" />
-	
-	<!--include file="$(find toad_bringup)/launch/stereo_proc.xml">
-	  <arg name="manager" value="/stereo/nodelet_manager"/>
-	</include-->
+	<include file="$(find toad_bringup)/launch/robot_pose_ekf.xml">
+	  <arg name="use_imu" value="false"/> <!-- there is some issue with simulated IMU... -->
+	</include>
 	
 	<node name="stereo_image_proc" pkg="stereo_image_proc" type="stereo_image_proc" ns="/stereo">
 	  <param name="disparity_range" type="int" value="128"/>

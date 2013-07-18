@@ -16,9 +16,9 @@ name="toad">
   <xacro:p3at_gazebo_ext/>
   
   <joint name="p3at_velodyne_joint" type="fixed">
-		<origin xyz="0.05 0 0.8" rpy="0 0 0"/>
+		<origin xyz="0.05 0 0.8" rpy="0 0 ${-90 * M_PI/180}"/>
 		<parent link="base_link"/>
-		<child link="velodyne_link"/>
+		<child link="velodyne"/>
 	</joint>
 	
 	<joint name="p3at_imu_joint" type="fixed">
@@ -28,18 +28,18 @@ name="toad">
 	</joint>
 	
 	<joint name="p3at_left_cam_joint" type="fixed">
-		<origin xyz="0.1 0.2 0.67" rpy="0 ${20 * M_PI/180} 0"/>
+		<origin xyz="0.1 0.2 0.67" rpy="0 ${16 * M_PI/180} 0"/>
 		<parent link="base_link"/>
 		<child link="left_cam_link"/>
 	</joint>
 	
 	<joint name="p3at_right_cam_joint" type="fixed">
-		<origin xyz="0.1 -0.2 0.67" rpy="0 ${20 * M_PI/180} 0"/>
+		<origin xyz="0.1 -0.2 0.67" rpy="0 ${16 * M_PI/180} 0"/>
 		<parent link="base_link"/>
 		<child link="right_cam_link"/>
 	</joint>
 	
-	<link name="velodyne_link">
+	<link name="velodyne">
 		<inertial>
 			<mass value="1.0"/>	
 			<origin xyz="0 0 0" rpy="0 0 0"/>
@@ -246,7 +246,7 @@ name="toad">
     </sensor>
   </gazebo>
   
- <gazebo reference="velodyne_link">
+ <gazebo reference="velodyne">
     <sensor type="gpu_ray" name="velodyne">
       <pose>0 0 0 0 0 0</pose>
       <visualize>false</visualize>
@@ -273,7 +273,7 @@ name="toad">
       </ray>
       <plugin name="gazebo_ros_velodyne_laser_controller" filename="libgazebo_ros_gpu_laser.so">
         <topicName>/velodyne/scan</topicName>
-        <frameName>velodyne_link</frameName>
+        <frameName>velodyne</frameName>
       </plugin>
     </sensor>
   </gazebo>
