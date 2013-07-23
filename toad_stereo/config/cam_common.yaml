@@ -5,6 +5,7 @@
 video_mode: 640x480_rgb8
 #video_mode: 320x240_yuv422
 frame_rate: 7.5
+#frame_rate: 3.75
 iso_speed: 400
 
 auto_gain: 2

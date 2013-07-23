@@ -8,6 +8,13 @@
   <url></url>
   <depend package="camera1394"/>
   <depend package="stereo_image_proc"/>
+  <depend package="sensor_msgs"/>
+  <depend package="dynamic_reconfigure"/>
+  <depend package="pluginlib"/>
+  
+  <!--export>
+    <nodelet plugin="${prefix}/nodelets.xml" />
+  </export-->
 
 </package>
 
