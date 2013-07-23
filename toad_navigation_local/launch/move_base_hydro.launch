@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<launch>
+
+	<!--delete old parameters -->
+	<rosparam command="delete" param="/move_base"/>
+
+	<!--- Run move base -->
+	<node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+
+		<param name="controller_frequency" value="10"/>
+
+		<!--- load parameters -->
+		<rosparam file="$(find toad_navigation_local)/config/hydro-nav-config.yaml" command="load" />
+	</node>
+
+</launch>
