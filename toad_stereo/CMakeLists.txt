@@ -13,7 +13,8 @@ rosbuild_init()
 
 #set the default path for built executables to the "bin" directory
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
-#rosbuild_add_executable(LMS100 src/LMS1xx_node.cpp)
-#rosbuild_add_executable(set_config src/setConfig.cpp)
+set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
+
+#rosbuild_add_library(throttling_nodelets src/throttling_nodelets.cpp)
 
 rosbuild_add_roslaunch_check(launch)
