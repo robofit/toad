@@ -1,0 +1,17 @@
+<library path="lib/libthrottling_nodelets">
+  <class type="toad_stereo::NodeletThrottleCompressedImage" base_class_type="nodelet::Nodelet">
+    <description>This is a compressed image throttling plugin.</description>
+  </class>
+  <class type="toad_stereo::NodeletThrottleParameterDescription" base_class_type="nodelet::Nodelet">
+    <description>This is a sensor message parameter description throttling plugin.</description>
+  </class>
+  <class type="toad_stereo::NodeletThrottleParameterUpdates" base_class_type="nodelet::Nodelet">
+  <description>This is a sensor message parameter update throttling plugin.</description>
+  </class>
+  <class type="toad_stereo::NodeletThrottleCameraInfo" base_class_type="nodelet::Nodelet">
+    <description>This is a compressed image throttling plugin.</description>
+  </class>
+  <class type="toad_stereo::NodeletThrottleImage" base_class_type="nodelet::Nodelet">
+    <description>This is an image throttling plugin.</description>
+  </class>
+</library>
