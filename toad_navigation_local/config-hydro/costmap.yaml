@@ -2,12 +2,35 @@
 global_costmap: 
   global_frame: odom
   robot_base_frame: base_footprint
-  update_frequency: 5.0
+  update_frequency: 1.0
   publish_frequency: 1.0
   rolling_window: true
-  width: 6.0
-  height: 6.0
-  resolution: 0.025
+  width: 20.0
+  height: 20.0
+  resolution: 0.25
+  origin_x: 0.0
+  origin_y: 0.0
+  plugins:
+   - {name: obstacles,        type: "costmap_2d::ObstacleLayer"}
+   - {name: foot,            type: "costmap_2d::FootprintLayer"}
+   - {name: inflater,         type: "costmap_2d::InflationLayer"}
+   - {name: road,             type: "costmap_2d::TraversabilityLayer"}
+
+  obstacles:
+    publish_voxel_map: true
+    observation_sources: velodyne_scan
+    velodyne_scan: {clearing: true, data_type: LaserScan, marking: true, sensor_frame: velodyne,
+      topic: /velodyne/scan}
+      
+local_costmap: 
+  global_frame: odom
+  robot_base_frame: base_footprint
+  update_frequency: 1.0
+  publish_frequency: 1.0
+  rolling_window: true
+  width: 20.0
+  height: 20.0
+  resolution: 0.25
   origin_x: 0.0
   origin_y: 0.0
   plugins:
