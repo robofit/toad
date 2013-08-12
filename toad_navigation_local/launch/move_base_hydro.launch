@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<launch>
+
+	<!--delete old parameters -->
+	<rosparam command="delete" param="/move_base"/>
+
+	<!--- Run move base -->
+	<node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+
+		<param name="controller_frequency" value="10"/>
+
+    <param name="base_local_planner" value="base_local_planner/TrajectoryPlannerROS" />
+    <rosparam file="$(find toad_navigation_local)/config-hydro/tr_planner.yaml" command="load" ns="TrajectoryPlannerROS" />
+
+		<!--- load parameters -->
+		<rosparam file="$(find toad_navigation_local)/config-hydro/move_base.yaml" command="load" />
+		<rosparam file="$(find toad_navigation_local)/config-hydro/costmap.yaml" command="load" />
+	</node>
+
+</launch>
