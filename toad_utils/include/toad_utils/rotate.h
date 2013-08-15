@@ -38,7 +38,7 @@ public:
    RobotDriver(ros::NodeHandle &nh, std::string name);
    ~RobotDriver();
 
-   tf::StampedTransform GetCurrentTransform();
+   bool GetCurrentOrientation(tf::Quaternion& quat);
 
    void executeCB(const rotateGoalConstPtr &goal);
 

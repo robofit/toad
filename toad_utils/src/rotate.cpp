@@ -6,19 +6,17 @@ using namespace toad_utils;
 RobotDriver::RobotDriver(ros::NodeHandle &nh, std::string name)
   {
 
-
-	//rotateActionGoalConstPtr goal;
-	//executeCB(goal);
-
 	as_.reset( new actionserver(nh, name, boost::bind(&RobotDriver::executeCB, this, _1), false) );
 
 	action_name_ = name;
 
     nh_ = nh;
     //set up the publisher for the cmd_vel topic
-    cmd_vel_pub_ = nh_.advertise<geometry_msgs::Twist>("cmd_vel", 1);
+    cmd_vel_pub_ = nh_.advertise<geometry_msgs::Twist>("cmd_vel", 3);
 
     as_->start();
+
+    ROS_INFO("Started.");
 
   }
 
@@ -28,42 +26,86 @@ RobotDriver::~RobotDriver() {
 
 }
 
-tf::StampedTransform RobotDriver::GetCurrentTransform() {
+bool RobotDriver::GetCurrentOrientation(tf::Quaternion& quat) {
 
-  listener_.waitForTransform("odom", "base_footprint",
-						   ros::Time(0), ros::Duration(10.0));
+  geometry_msgs::PoseStamped pose;
 
-  tf::StampedTransform current_transform;
-  listener_.lookupTransform("odom", "base_footprint",
-						  ros::Time(0), current_transform);
-  return current_transform;
+  pose.header.frame_id = "base_link";
+  pose.header.stamp = ros::Time(0);
+
+  pose.pose.position.x = 0;
+  pose.pose.position.y = 0;
+  pose.pose.position.z = 0;
+
+  pose.pose.orientation.x = 0;
+  pose.pose.orientation.y = 0;
+  pose.pose.orientation.z = 0;
+  pose.pose.orientation.w = 1;
+
+  try {
+
+	  listener_.transformPose("odom",pose,pose);
+
+  } catch (tf::TransformException& ex){
+
+	  ROS_ERROR("%s",ex.what());
+      return false;
+
+    }
+
+  quat.setX(pose.pose.orientation.x);
+  quat.setY(pose.pose.orientation.y);
+  quat.setZ(pose.pose.orientation.z);
+  quat.setW(pose.pose.orientation.w);
+
+  return true;
+
 }
 
 void RobotDriver::executeCB(const rotateGoalConstPtr &goal)
  {
 
-   // helper variables
-   ros::Rate r(1);
-   bool success = true;
-   double rot_step = 0.05;
 
-   bool promenna = 0;
-   while(promenna == 0)
-   {
-std::cout << "Rotuji smerem k cili" << std::endl;
-	   if (goal->requested_yaw > 0)
-   promenna = turnOdom(0,rot_step);
-	   else
-   promenna = turnOdom(1,rot_step);
+   ROS_INFO("%s: Received goal.", action_name_.c_str());
+
+   bool ret = true;
+   bool ret2 = false;
+
+   bool dir = goal->requested_yaw > 0;
+
+   double ang = fabs(goal->requested_yaw);
+
+   while(ang > 2*M_PI)
+   	{
+   		ang -= 2*M_PI;
+   	}
+
+   double th = 0.9*M_PI;
+
+   if (ang > th) {
+
+	   ret = turnOdom(dir, th);
+
    }
 
-   if(success)
+   ret2 = turnOdom(dir, fabs(ang - th));
+
+
+   if(ret && ret2)
    {
 	// result_.sequence = feedback_.sequence;
-	 ROS_INFO("%s: Succeeded", action_name_.c_str());
+	 ROS_INFO("%s: Succeeded to rotate robot.", action_name_.c_str());
 	 // set the action state to succeeded
 	 as_->setSucceeded();
+
+   } else {
+
+	   ROS_INFO("%s: Failed to rotate robot.", action_name_.c_str());
+	   as_->setAborted();
+
    }
+
+
  }
 
 
@@ -71,69 +113,81 @@ std::cout << "Rotuji smerem k cili" << std::endl;
 bool RobotDriver::turnOdom(bool clockwise, double radians)
 {
 
-	while(radians < 0)
-	{
-		radians += 2*M_PI;
-	}
-	while(radians > 2*M_PI)
-	{
-		radians -= 2*M_PI;
-	}
-	//wait for the listener to get the first message
-	listener_.waitForTransform("base_footprint", "odom",
-							   ros::Time(0), ros::Duration(1.0));
 
-	//we will record transforms here
-	tf::StampedTransform start_transform;
-	tf::StampedTransform current_transform;
+	tf::Quaternion start_orientation;
+	tf::Quaternion current_orientation;
 
-	//record the starting transform from the odometry to the base frame
-	listener_.lookupTransform("base_footprint", "odom",
-							  ros::Time(0), start_transform);
+	if (!GetCurrentOrientation(start_orientation)) {
+
+		ROS_ERROR("Can't get start orientation.");
+
+	}
+
+	double max_velocity = 0.25;
+	double min_velocity = 0.075;
 
 	//we will be sending commands of type "twist"
 	geometry_msgs::Twist base_cmd;
 	//the command will be to turn at 0.25 rad/s
 	base_cmd.linear.x = base_cmd.linear.y = 0.0;
-	base_cmd.angular.z = 0.25;
-	if (clockwise) base_cmd.angular.z = -base_cmd.angular.z;
+	base_cmd.angular.z = 0.0;
 
-	//the axis we want to be rotating by
-	tf::Vector3 desired_turn_axis(0,0,1);
-	if (!clockwise) desired_turn_axis = -desired_turn_axis;
+	tf::Quaternion start_inv = start_orientation.inverse();
+
+	ros::Time time_start = ros::Time::now();
+	ros::Duration timeout = ros::Duration(45);
 
 	ros::Rate rate(10.0);
 	bool done = false;
 	while (!done && nh_.ok())
 	{
 
-		  //get the current transform
-		  try
-		  {
-			listener_.lookupTransform("base_footprint", "odom",
-									  ros::Time(0), current_transform);
-		  }
-		  catch (tf::TransformException& ex)
-		  {
-			ROS_ERROR("%s",ex.what());
+		if (ros::Time::now()-time_start > timeout) {
+
+			ROS_ERROR("Hmm, tried to rotate robot for too much time...");
 			break;
-		  }
 
-		  tf::Transform relative_transform = start_transform.inverse() * current_transform;
-		  tf::Vector3 actual_turn_axis = relative_transform.getRotation().getAxis();
-		  double angle_turned = relative_transform.getRotation().getAngle();
+		}
+
+		if (!GetCurrentOrientation(current_orientation)) {
+
+				ROS_ERROR("Can't get current orientation.");
+				rate.sleep();
+				continue;
+
+			}
+
+		double angle = fabs(tf::getYaw(current_orientation * start_inv));
 
 
-		  if ( actual_turn_axis.dot( desired_turn_axis ) < 0 )
-			angle_turned = 2 * M_PI - angle_turned;
+		std::cout << angle << " " << radians << std::endl;
+
+		double vel = max_velocity;
+
+		// TODO code something more clever
+		if (angle > 0.9*radians) {
+
+			vel = min_velocity;
+
+		}
 
 
-		  if (angle_turned >= radians)
+		  if (angle >= radians)
 		  {
-			done = true;
+
+			  base_cmd.angular.z = 0;
+			  cmd_vel_pub_.publish(base_cmd);
+			  cmd_vel_pub_.publish(base_cmd);
+			  cmd_vel_pub_.publish(base_cmd);
+
+			  done = true;
 		  }
 		  else
 		  {
+
+			base_cmd.angular.z = vel;
+			if (clockwise) base_cmd.angular.z = -base_cmd.angular.z;
+
 			cmd_vel_pub_.publish(base_cmd);
 			rate.sleep();
 		  }

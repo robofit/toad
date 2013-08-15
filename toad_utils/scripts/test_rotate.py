@@ -45,13 +45,23 @@ def main():
   rospy.loginfo('Sending goal...')
   goal = rotateGoal()
   
-  goal.requested_yaw = 0.5
+  
+  goal.requested_yaw = -5.5
   
   client.send_goal(goal)
-
   client.wait_for_result()
-  
   result = client.get_result()
+  
+  rospy.sleep(2)
+  
+  goal.requested_yaw = 5.5
+  
+  client.send_goal(goal)
+  client.wait_for_result()
+  result = client.get_result()
+  
+  rospy.sleep(2)
+  
   
   rospy.loginfo("Finished.")
   
