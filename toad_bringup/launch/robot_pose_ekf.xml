@@ -15,7 +15,7 @@
   <param name="publish_tf" value="true"/>
   <param name="self_diagnose" value="true"/>
   
-  <remap from="odom" to="/odom"/>
+  <remap from="odom_in" to="/odom"/>
   <remap from="imu_data" to="/imu_3dm_node/imu/data"/>
   <!--remap from="vo" to="/imu_3dm_node/nav/odom"/-->
   <remap from="vo" to="/laser_scan_matcher/odom"/>

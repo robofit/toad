@@ -7,9 +7,10 @@ global_costmap:
   rolling_window: true
   width: 20.0
   height: 20.0
-  resolution: 0.25
+  resolution: 0.05
   origin_x: 0.0
   origin_y: 0.0
+  transform_tolerance: 1.0 # mainly because of testing with bagfiles
   plugins:
    - {name: obstacles,        type: "costmap_2d::ObstacleLayer"}
    - {name: foot,            type: "costmap_2d::FootprintLayer"}
@@ -17,10 +18,12 @@ global_costmap:
    - {name: road,             type: "costmap_2d::TraversabilityLayer"}
 
   obstacles:
-    publish_voxel_map: true
+    publish_voxel_map: false
     observation_sources: velodyne_scan
     velodyne_scan: {clearing: true, data_type: LaserScan, marking: true, sensor_frame: velodyne,
-      topic: /velodyne/scan}
+      topic: /velodyne/scan, expected_update_rate: 0.5, observation_persistence: 0.2}
+    obstacle_range: 5.5
+    raytrace_range: 6.0
       
 local_costmap: 
   global_frame: odom
@@ -30,9 +33,10 @@ local_costmap:
   rolling_window: true
   width: 20.0
   height: 20.0
-  resolution: 0.25
+  resolution: 0.05
   origin_x: 0.0
   origin_y: 0.0
+  transform_tolerance: 1.0
   plugins:
    - {name: obstacles,        type: "costmap_2d::ObstacleLayer"}
    - {name: foot,            type: "costmap_2d::FootprintLayer"}
@@ -40,9 +44,11 @@ local_costmap:
    - {name: road,             type: "costmap_2d::TraversabilityLayer"}
 
   obstacles:
-    publish_voxel_map: true
+    publish_voxel_map: false
     observation_sources: velodyne_scan
     velodyne_scan: {clearing: true, data_type: LaserScan, marking: true, sensor_frame: velodyne,
-      topic: /velodyne/scan}
+      topic: /velodyne/scan, expected_update_rate: 0.5, observation_persistence: 0.2}
+    obstacle_range: 5.5
+    raytrace_range: 6.0
       
 # https://github.com/DLu/pr2_navigation/blob/hydro/pr2_navigation_super_config/params/lite_costmap.yaml

@@ -7,7 +7,7 @@
 	<!--- Run move base -->
 	<node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
 
-		<param name="controller_frequency" value="10"/>
+		<param name="controller_frequency" value="5"/>
 
     <param name="base_local_planner" value="base_local_planner/TrajectoryPlannerROS" />
     <rosparam file="$(find toad_navigation_local)/config-hydro/tr_planner.yaml" command="load" ns="TrajectoryPlannerROS" />
