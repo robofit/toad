@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 <launch>
 
+  <arg name="indoor" default="false"/>
+  <arg name="stereo" default="false"/>
+
   <!-- send table.xml to param server -->
   <include file="$(find toad_description)/launch/upload.launch" />
 
@@ -29,14 +32,16 @@
 	</node>
 	
 	<!-- Stereo (nodelets / nodes) -->
-	<include file="$(find toad_stereo)/launch/stereo_nodelets.launch" />
+	<include unless="$(arg stereo)" file="$(find toad_stereo)/launch/mono_nodelets.launch" />
+	<include if="$(arg stereo)" file="$(find toad_stereo)/launch/stereo_nodelets.launch" />
 	
 	<!-- Microstrain IMU -->
 	<include file="$(find microstrain_3dm_gx3_45)/launch/imu.launch" />
 	
 	<!-- odometry stuff -->
-	<include file="$(find toad_bringup)/launch/robot_pose_ekf.xml" />
-	<include file="$(find toad_bringup)/launch/laser_scan_matcher_nodelet.xml" />
+	<include if="$(arg indoor)" file="$(find toad_bringup)/launch/robot_pose_ekf_indoor.xml" />
+	<include unless="$(arg indoor)" file="$(find toad_bringup)/launch/robot_pose_ekf_indoor.xml" />
+	<include if="$(arg indoor)" file="$(find toad_bringup)/launch/laser_scan_matcher_nodelet.xml" />
 	
 	<!-- Velodyne driver -->
 	<include file="$(find but_velodyne)/launch/velodyne.launch" />
