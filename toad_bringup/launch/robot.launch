@@ -29,14 +29,14 @@
 	</node>
 	
 	<!-- Stereo (nodelets / nodes) -->
-	<include file="$(find toad_stereo)/launch/stereo_nodelets.launch" />
+	<include file="$(find toad_stereo)/launch/mono_nodelets.launch" />
 	
 	<!-- Microstrain IMU -->
 	<include file="$(find microstrain_3dm_gx3_45)/launch/imu.launch" />
 	
 	<!-- odometry stuff -->
 	<include file="$(find toad_bringup)/launch/robot_pose_ekf.xml" />
-	<include file="$(find toad_bringup)/launch/laser_scan_matcher_nodelet.xml" />
+	<!--include file="$(find toad_bringup)/launch/laser_scan_matcher_nodelet.xml" /-->
 	
 	<!-- Velodyne driver -->
 	<include file="$(find but_velodyne)/launch/velodyne.launch" />

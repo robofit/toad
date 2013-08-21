@@ -9,7 +9,10 @@
 
 		<param name="controller_frequency" value="5"/>
 
+    <param name="base_global_planner" value="carrot_planner/CarrotPlanner"/>
     <param name="base_local_planner" value="base_local_planner/TrajectoryPlannerROS" />
+    
+    <rosparam file="$(find toad_navigation_local)/config-hydro/carrot_planner.yaml" command="load" ns="CarrotPlanner" />
     <rosparam file="$(find toad_navigation_local)/config-hydro/tr_planner.yaml" command="load" ns="TrajectoryPlannerROS" />
 
 		<!--- load parameters -->

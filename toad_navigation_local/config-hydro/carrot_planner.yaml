@@ -1,0 +1,4 @@
+# http://www.ros.org/wiki/carrot_planner
+
+# step_size:
+min_dist_from_robot: 0.4 # The minimum distance from the robot in meters at which a goal point will be sent to the local planner.

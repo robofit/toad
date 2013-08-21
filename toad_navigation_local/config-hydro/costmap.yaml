@@ -22,8 +22,8 @@ global_costmap:
     observation_sources: velodyne_scan
     velodyne_scan: {clearing: true, data_type: LaserScan, marking: true, sensor_frame: velodyne,
       topic: /velodyne/scan, expected_update_rate: 0.5, observation_persistence: 0.2}
-    obstacle_range: 5.5
-    raytrace_range: 6.0
+    obstacle_range: 7.0
+    raytrace_range: 8.0
       
 local_costmap: 
   global_frame: odom
@@ -48,7 +48,7 @@ local_costmap:
     observation_sources: velodyne_scan
     velodyne_scan: {clearing: true, data_type: LaserScan, marking: true, sensor_frame: velodyne,
       topic: /velodyne/scan, expected_update_rate: 0.5, observation_persistence: 0.2}
-    obstacle_range: 5.5
-    raytrace_range: 6.0
+    obstacle_range: 7.0
+    raytrace_range: 8.0
       
 # https://github.com/DLu/pr2_navigation/blob/hydro/pr2_navigation_super_config/params/lite_costmap.yaml

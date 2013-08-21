@@ -3,7 +3,7 @@ acc_lim_x: 2.5
 acc_lim_y: 2.5
 angular_sim_granularity: 0.025
 dwa: true
-heading_lookahead: 0.3
+heading_lookahead: 0.325
 heading_scoring: false
 heading_scoring_timestep: 0.1
 holonomic_robot: false
@@ -13,7 +13,9 @@ max_vel_x: 0.2
 meter_scoring: true
 min_in_place_rotational_vel: 0.01
 min_vel_x: -0.2
-occdist_scale: 0.05
+goal_distance_bias: 0.8
+path_distance_bias: 0.6
+occdist_scale: 0.2 #0.05
 oscillation_reset_dist: 0.05
 sim_granularity: 0.025
 sim_time: 1.7

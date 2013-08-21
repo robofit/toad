@@ -9,7 +9,7 @@
   <param name="debug" value="false"/>
   <param name="sensor_timeout" value="2.0"/>  
   <param name="odom_used" value="true"/>
-  <param name="imu_used" value="$(arg use_imu)"/>
+  <param name="imu_used" value="true"/>
   <param name="vo_used" value="true"/>
   <param name="gps_used" value="false"/>
   <param name="publish_tf" value="true"/>
@@ -17,8 +17,9 @@
   
   <remap from="odom_in" to="/odom"/>
   <remap from="imu_data" to="/imu_3dm_node/imu/data"/>
-  <!--remap from="vo" to="/imu_3dm_node/nav/odom"/-->
-  <remap from="vo" to="/laser_scan_matcher/odom"/>
+  <!--remap from="gps" to="/imu_3dm_node/nav/odom"/-->
+  <!--remap from="vo" to="/laser_scan_matcher/odom"/-->
+  <remap from="vo" to="/imu_3dm_node/nav/odom"/>
 
 </node>
 
