@@ -11,7 +11,7 @@
   <depend package="p2os_driver"/>
   <depend package="p2os_launch"/>
   <depend package="p2os_urdf"/>
-  <depend package="turtlebot_teleop"/>
+  <!--depend package="turtlebot_teleop"/-->
   <depend package="robot_pose_ekf"/>
   <depend package="microstrain_3dm_gx3_45"/>
   <depend package="stereo_image_proc"/>
