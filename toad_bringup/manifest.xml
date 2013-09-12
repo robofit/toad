@@ -16,6 +16,7 @@
   <depend package="microstrain_3dm_gx3_45"/>
   <depend package="stereo_image_proc"/>
   <depend package="but_velodyne"/>
+  <depend package="toad_utils"/>
 
 </package>
 

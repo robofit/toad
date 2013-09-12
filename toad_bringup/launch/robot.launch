@@ -38,6 +38,9 @@
 	<!-- Microstrain IMU -->
 	<include file="$(find microstrain_3dm_gx3_45)/launch/imu.launch" />
 	
+	<!-- script for publishing robot heading -->
+	<node pkg="toad_utils" type="heading.py" name="robot_heading" output="screen"/>
+	
 	<!-- odometry stuff -->
 	<include if="$(arg indoor)" file="$(find toad_bringup)/launch/robot_pose_ekf_indoor.xml" />
 	<include unless="$(arg indoor)" file="$(find toad_bringup)/launch/robot_pose_ekf_indoor.xml" />
