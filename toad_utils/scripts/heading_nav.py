@@ -34,6 +34,8 @@ import numpy as np
 from scipy.stats import norm
 
 from sensor_msgs.msg import Imu
+from nav_msgs.msg import Odometry
+
 
 from tf.transformations import euler_from_quaternion
 
@@ -53,7 +55,7 @@ class print_heading(object):
         
         self.heading = []
         
-        rospy.Subscriber("/imu_3dm_node/imu/data", Imu, self.imu_callback, queue_size=3)
+        rospy.Subscriber("/imu_3dm_node/nav/odom", Odometry, self.imu_callback, queue_size=3)
         self.pub = rospy.Publisher('/robot_heading', HeadingMsg)
         
         rospy.loginfo("Heading script. Declination: " + str(round(self.declination,2)) + ", filter len: " + str(round(self.buff_len)) )
@@ -63,9 +65,9 @@ class print_heading(object):
      
     def imu_callback(self,msg):
         
-        (roll,pitch,yaw) = euler_from_quaternion([msg.orientation.x, msg.orientation.y, msg.orientation.z, msg.orientation.w])
+        (roll,pitch,yaw) = euler_from_quaternion([msg.pose.pose.orientation.x, msg.pose.pose.orientation.y, msg.pose.pose.orientation.z, msg.pose.pose.orientation.w])
         
-        yaw += pi/2.0 # why????????
+        #yaw += pi # why????????
     
         # apply correction for magnetic declination
         yaw += self.declination

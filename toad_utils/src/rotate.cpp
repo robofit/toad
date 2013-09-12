@@ -66,19 +66,22 @@ void RobotDriver::executeCB(const rotateGoalConstPtr &goal)
  {
 
 
-   ROS_INFO("%s: Received goal.", action_name_.c_str());
+   ROS_INFO("%s: Received goal (%f).", action_name_.c_str(),goal->requested_yaw);
 
    bool ret = true;
-   bool ret2 = false;
+   //bool ret2 = false;
 
    bool dir = goal->requested_yaw > 0;
 
    double ang = fabs(goal->requested_yaw);
 
-   while(ang > 2*M_PI)
+
+   /*while(ang > 2*M_PI)
    	{
    		ang -= 2*M_PI;
    	}
+
+   std::cout << "c ang: " << ang << std::endl;
 
    double th = 0.9*M_PI;
 
@@ -86,12 +89,14 @@ void RobotDriver::executeCB(const rotateGoalConstPtr &goal)
 
 	   ret = turnOdom(dir, th);
 
-   }
+   }*/
 
-   ret2 = turnOdom(dir, fabs(ang - th));
+   ret = turnOdom(dir, fabs(ang));
+
+   //ret = turnOdom(dir, ang);
 
 
-   if(ret && ret2)
+   if(ret)
    {
 	// result_.sequence = feedback_.sequence;
 	 ROS_INFO("%s: Succeeded to rotate robot.", action_name_.c_str());
@@ -110,7 +115,7 @@ void RobotDriver::executeCB(const rotateGoalConstPtr &goal)
 
 
 
-bool RobotDriver::turnOdom(bool clockwise, double radians)
+bool RobotDriver::turnOdom(bool dir, double radians)
 {
 
 
@@ -123,13 +128,14 @@ bool RobotDriver::turnOdom(bool clockwise, double radians)
 
 	}
 
-	double max_velocity = 0.25;
-	double min_velocity = 0.075;
+	double max_velocity = 0.5;
+	//double min_velocity = 0.25;
 
 	//we will be sending commands of type "twist"
 	geometry_msgs::Twist base_cmd;
 	//the command will be to turn at 0.25 rad/s
-	base_cmd.linear.x = base_cmd.linear.y = 0.0;
+	base_cmd.linear.x = 0.05; // this might help with turning...
+	base_cmd.linear.y = 0.0;
 	base_cmd.angular.z = 0.0;
 
 	tf::Quaternion start_inv = start_orientation.inverse();
@@ -164,12 +170,12 @@ bool RobotDriver::turnOdom(bool clockwise, double radians)
 
 		double vel = max_velocity;
 
-		// TODO code something more clever
-		if (angle > 0.9*radians) {
+		// TODO code something more clever -> small velocity doesn't work well outside!
+		/*if (angle > 0.9*radians) {
 
 			vel = min_velocity;
 
-		}
+		}*/
 
 
 		  if (angle >= radians)
@@ -185,8 +191,8 @@ bool RobotDriver::turnOdom(bool clockwise, double radians)
 		  else
 		  {
 
-			base_cmd.angular.z = vel;
-			if (clockwise) base_cmd.angular.z = -base_cmd.angular.z;
+			if (dir) base_cmd.angular.z = vel;
+			else base_cmd.angular.z = -vel;
 
 			cmd_vel_pub_.publish(base_cmd);
 			rate.sleep();

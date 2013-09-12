@@ -14,20 +14,27 @@ recovery_behaviors:
     type: 'clear_costmap_recovery/ClearCostmapRecovery'
   - name: 'aggressive_reset'
     type: 'clear_costmap_recovery/ClearCostmapRecovery'
-  - name: 'move_slow_and_clear'
-    type: 'move_slow_and_clear/MoveSlowAndClear'
+  - name: 'rotate_reset'
+    type: 'rotate_recovery/RotateRecovery'
+# not compatible with TrajectoryPlannerROS 
+#  - name: 'move_slow_and_clear'
+#    type: 'move_slow_and_clear/MoveSlowAndClear'
 
 super_conservative_reset:
-  reset_distance: 5.0
-
-conservative_reset:
   reset_distance: 3.0
 
-aggressive_reset:
-  reset_distance: 1.84
+conservative_reset:
+  reset_distance: 2.0
 
-move_slow_and_clear:
-  clearing_distance: 0.5
-  limited_trans_speed: 0.25
-  limited_rot_speed: 0.45
-  limited_distance: 0.3
+aggressive_reset:
+  reset_distance: 0.0
+
+rotate_reset:
+  sim_granularity: 0.025
+  frequency: 5
+
+#move_slow_and_clear:
+#  clearing_distance: 0.5
+#  limited_trans_speed: 0.25
+#  limited_rot_speed: 0.45
+#  limited_distance: 0.3

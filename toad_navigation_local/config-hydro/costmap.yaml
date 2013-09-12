@@ -5,8 +5,8 @@ global_costmap:
   update_frequency: 1.0
   publish_frequency: 1.0
   rolling_window: true
-  width: 20.0
-  height: 20.0
+  width: 10.0
+  height: 10.0
   resolution: 0.05
   origin_x: 0.0
   origin_y: 0.0
@@ -15,7 +15,16 @@ global_costmap:
    - {name: obstacles,        type: "costmap_2d::ObstacleLayer"}
    - {name: foot,            type: "costmap_2d::FootprintLayer"}
    - {name: inflater,         type: "costmap_2d::InflationLayer"}
-   - {name: road,             type: "costmap_2d::TraversabilityLayer"}
+  # - {name: road,             type: "costmap_2d::TraversabilityLayer"}
+   - {name: road_vel,             type: "costmap_2d::TraversabilityLayer"}
+
+  road:
+  
+    map_topic: /det2costmap/occ_map
+    
+  road_vel:
+  
+    map_topic: /velodyne/map2d
 
   obstacles:
     publish_voxel_map: false
@@ -32,17 +41,26 @@ local_costmap:
   update_frequency: 1.0
   publish_frequency: 1.0
   rolling_window: true
-  width: 20.0
-  height: 20.0
+  width: 10.0
+  height: 10.0
   resolution: 0.05
   origin_x: 0.0
   origin_y: 0.0
   transform_tolerance: 0.5
   plugins:
-   - {name: obstacles,        type: "costmap_2d::ObstacleLayer"}
+   - {name: obstacles,       type: "costmap_2d::ObstacleLayer"}
    - {name: foot,            type: "costmap_2d::FootprintLayer"}
-   - {name: inflater,         type: "costmap_2d::InflationLayer"}
-   - {name: road,             type: "costmap_2d::TraversabilityLayer"}
+   - {name: inflater,        type: "costmap_2d::InflationLayer"}
+  # - {name: road,            type: "costmap_2d::TraversabilityLayer"}
+   - {name: road_vel,        type: "costmap_2d::TraversabilityLayer"}
+
+  road:
+  
+    map_topic: /det2costmap/occ_map
+    
+  road_vel:
+  
+    map_topic: /velodyne/map2d
 
   obstacles:
     publish_voxel_map: true
