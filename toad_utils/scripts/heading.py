@@ -37,14 +37,15 @@ from sensor_msgs.msg import Imu
 
 from tf.transformations import euler_from_quaternion
 
-from std_msgs.msg import Float32
+#from std_msgs.msg import Float32
+from toad_utils.msg import heading as HeadingMsg
 
 
 class print_heading(object):
     
     def __init__(self):
     
-        self.buff_len = rospy.get_param("~filter_len", 20)
+        self.buff_len = rospy.get_param("~filter_len", 0)
 
         self.declination = rospy.get_param("~declination", (3.81777/360)*2*pi) # Brno (2013)
         
@@ -53,9 +54,9 @@ class print_heading(object):
         self.heading = []
         
         rospy.Subscriber("/imu_3dm_node/imu/data", Imu, self.imu_callback, queue_size=3)
-        self.pub = rospy.Publisher('/robot_heading', Float32)
+        self.pub = rospy.Publisher('/robot_heading', HeadingMsg)
         
-        rospy.loginfo("Heading script. Declination: " + str(round(self.declination,2)) + ", filter len: " + str(roundself.buff_len) )
+        rospy.loginfo("Heading script. Declination: " + str(round(self.declination,2)) + ", filter len: " + str(round(self.buff_len)) )
         
         self.published = False
      
@@ -64,13 +65,7 @@ class print_heading(object):
         
         (roll,pitch,yaw) = euler_from_quaternion([msg.orientation.x, msg.orientation.y, msg.orientation.z, msg.orientation.w])
         
-        if yaw > 0:
-            
-            yaw = 2*pi - yaw
-            
-        else:
-            
-            yaw = -1*yaw
+        yaw += pi/2.0 # why????????
     
         # apply correction for magnetic declination
         yaw += self.declination
@@ -78,19 +73,23 @@ class print_heading(object):
         if yaw > 2*pi:
         
             yaw -= 2*pi
+            
+        if yaw < 0:
+            
+            yaw += 2*pi
         
         
-        if len(self.heading) >= self.buff_len:
+        if len(self.heading) > 0 and len(self.heading) >= self.buff_len:
             
             self.heading.pop(0)
         
         self.heading.append(yaw)
         
         param = norm.fit(self.heading)
-        mean = param[0]
         
-        mmsg = Float32()
-        mmsg.data = mean
+        mmsg = HeadingMsg()
+        mmsg.mean = param[0]
+        mmsg.stddev = param[1]
         
         self.pub.publish(mmsg)
         

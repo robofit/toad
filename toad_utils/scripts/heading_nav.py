@@ -36,33 +36,38 @@ from scipy.stats import norm
 from sensor_msgs.msg import Imu
 from nav_msgs.msg import Odometry
 
+
 from tf.transformations import euler_from_quaternion
+
+#from std_msgs.msg import Float32
+from toad_utils.msg import heading as HeadingMsg
 
 
 class print_heading(object):
     
     def __init__(self):
+    
+        self.buff_len = rospy.get_param("~filter_len", 0)
 
-        self.declination = (3.81777/360)*2*pi # Brno (2013)
+        self.declination = rospy.get_param("~declination", (3.81777/360)*2*pi) # Brno (2013)
         
         self.mutex = threading.Lock()
         
         self.heading = []
         
         rospy.Subscriber("/imu_3dm_node/nav/odom", Odometry, self.imu_callback, queue_size=3)
+        self.pub = rospy.Publisher('/robot_heading', HeadingMsg)
+        
+        rospy.loginfo("Heading script. Declination: " + str(round(self.declination,2)) + ", filter len: " + str(round(self.buff_len)) )
+        
+        self.published = False
      
      
     def imu_callback(self,msg):
         
         (roll,pitch,yaw) = euler_from_quaternion([msg.pose.pose.orientation.x, msg.pose.pose.orientation.y, msg.pose.pose.orientation.z, msg.pose.pose.orientation.w])
         
-        if yaw > 0:
-            
-            yaw = 2*pi - yaw
-            
-        else:
-            
-            yaw = -1*yaw
+        #yaw += pi # why????????
     
         # apply correction for magnetic declination
         yaw += self.declination
@@ -70,56 +75,38 @@ class print_heading(object):
         if yaw > 2*pi:
         
             yaw -= 2*pi
+            
+        if yaw < 0:
+            
+            yaw += 2*pi
         
-        self.mutex.acquire()
+        
+        if len(self.heading) > 0 and len(self.heading) >= self.buff_len:
+            
+            self.heading.pop(0)
         
         self.heading.append(yaw)
         
-        self.mutex.release()   
+        param = norm.fit(self.heading)
+        
+        mmsg = HeadingMsg()
+        mmsg.mean = param[0]
+        mmsg.stddev = param[1]
+        
+        self.pub.publish(mmsg)
+        
+        if self.published is False:
+            
+            rospy.loginfo("Publishing robot heading.")
+            self.published = True
        
-    def spin(self):
-        
-        
-        self.mutex.acquire()
-        self.imu_msg = None 
-        self.mutex.release()
-        
-        
-        r = rospy.Rate(10)
-        
-        print "spin"
- 
-        while not rospy.is_shutdown():
-            
-            r.sleep()
-            
-            mean = None
-            
-            self.mutex.acquire()
-            
-            if len(self.heading) > 100:
-                
-                param = norm.fit(self.heading)
-                mean = param[0]
-                self.heading = []
-            
-            self.mutex.release()
-            
-            if mean is None:
-                
-                continue
-        
-            
-            print "Current heading: " + str(mean) + " (" + str( (mean/(2*pi))*360.0 ) + ")"
- 
- 
  
 def main():
     
     rospy.init_node('heading_node')
     node_class = print_heading()
     try:
-        node_class.spin()
+        rospy.spin()
     except rospy.ROSInterruptException: pass
 
 if __name__ == '__main__':
