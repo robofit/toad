@@ -10,28 +10,80 @@ oscillation_distance: 0.5
 recovery_behaviors:
   - name: 'super_conservative_reset'
     type: 'clear_costmap_recovery/ClearCostmapRecovery'
+    
+  - name: 'super_conservative_reset_road'
+    type: 'clear_costmap_recovery/ClearCostmapRecovery'
+  
+  - name: 'super_conservative_reset_road_vel'
+    type: 'clear_costmap_recovery/ClearCostmapRecovery'  
+    
   - name: 'conservative_reset'
     type: 'clear_costmap_recovery/ClearCostmapRecovery'
+    
+  - name: 'conservative_reset_road'
+    type: 'clear_costmap_recovery/ClearCostmapRecovery'
+    
+  - name: 'conservative_reset_road_vel'
+    type: 'clear_costmap_recovery/ClearCostmapRecovery'
+    
   - name: 'aggressive_reset'
     type: 'clear_costmap_recovery/ClearCostmapRecovery'
-  - name: 'rotate_reset'
-    type: 'rotate_recovery/RotateRecovery'
+       
+  - name: 'aggressive_reset_road'
+    type: 'clear_costmap_recovery/ClearCostmapRecovery'  
+    
+  - name: 'aggressive_reset_road_vel'
+    type: 'clear_costmap_recovery/ClearCostmapRecovery' 
+   
+   
+   
+    
+  #- name: 'rotate_reset'
+  #  type: 'rotate_recovery/RotateRecovery'
+    
 # not compatible with TrajectoryPlannerROS 
 #  - name: 'move_slow_and_clear'
 #    type: 'move_slow_and_clear/MoveSlowAndClear'
 
 super_conservative_reset:
-  reset_distance: 3.0
+  reset_distance: 2.0
 
 conservative_reset:
-  reset_distance: 2.0
+  reset_distance: 1.0
 
 aggressive_reset:
   reset_distance: 0.0
 
-rotate_reset:
-  sim_granularity: 0.025
-  frequency: 5
+#rotate_reset:
+#  sim_granularity: 0.025
+#  frequency: 5
+  
+  
+super_conservative_reset_road:
+  reset_distance: 2.0
+  layer_search_string: road
+  
+conservative_reset_road:
+  reset_distance: 1.0
+  layer_search_string: road
+  
+aggressive_reset_road:
+  reset_distance: 0.0
+  layer_search_string: road
+  
+  
+  
+super_conservative_reset_road_vel:
+  reset_distance: 2.0
+  layer_search_string: road_vel
+  
+conservative_reset_road_vel:
+  reset_distance: 1.0
+  layer_search_string: road_vel
+  
+aggressive_reset_road_vel:
+  reset_distance: 0.0
+  layer_search_string: road_vel
 
 #move_slow_and_clear:
 #  clearing_distance: 0.5

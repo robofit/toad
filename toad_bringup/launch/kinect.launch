@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- Start the Dynamixel motor manager to control all SmartArm servos -->
+ <!--node name="smartarm_motor_manager" pkg="dynamixel_controllers" type="controller_manager.py" required="true" output="screen">
+        <rosparam>
+            namespace: smartarm_motor_manager
+            diagnostics_rate: 10
+            serial_ports:
+                smart_arm:
+                    port_name: "/dev/ttyUSB1"
+                    baud_rate: 250000
+                    min_motor_id: 11
+                    max_motor_id: 11
+                    update_rate: 50
+        </rosparam>
+    </node-->
+    
+    <param name="/cam3d/driver/data_skip" type="int" value="3"/>
+
+	  <include file="$(find openni_launch)/launch/openni.launch">
+		  <arg name="camera" value="cam3d"/>
+		  <!--arg name="depth_registration" value="true"/-->
+      
+	</include>
+	
+  <node pkg="tf" type="static_transform_publisher" name="kinect_base_link5" args="0.08 -0.02 0.61 0 0.6 0 /base_link /cam3d_rgb_frame 50"/>
+	
+	
+
+</launch>

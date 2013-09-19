@@ -47,7 +47,8 @@ class print_heading(object):
     
         self.buff_len = rospy.get_param("~filter_len", 0)
 
-        self.declination = rospy.get_param("~declination", (3.81777/360)*2*pi) # Brno (2013)
+        #self.declination = rospy.get_param("~declination", (3.81777/360)*2*pi) # Brno (2013)
+        self.declination = rospy.get_param("~declination", (4.787222/360)*2*pi) # Lodz (2013)
         
         self.mutex = threading.Lock()
         
@@ -65,19 +66,22 @@ class print_heading(object):
         
         (roll,pitch,yaw) = euler_from_quaternion([msg.orientation.x, msg.orientation.y, msg.orientation.z, msg.orientation.w])
         
-        yaw += pi/2.0 # why????????
+        #yaw += pi/2.0 # why????????
+    
+        yaw *= -1.0 
     
         # apply correction for magnetic declination
         yaw += self.declination
     
-        if yaw > 2*pi:
+        #if yaw >= 2*pi:
         
-            yaw -= 2*pi
+        #    yaw -= 2*pi
             
-        if yaw < 0:
+        #elif yaw < 0:
             
-            yaw += 2*pi
+        #    yaw += 2*pi
         
+        #print str(yaw/(2*pi)*360)
         
         if len(self.heading) > 0 and len(self.heading) >= self.buff_len:
             
@@ -85,11 +89,19 @@ class print_heading(object):
         
         self.heading.append(yaw)
         
-        param = norm.fit(self.heading)
-        
         mmsg = HeadingMsg()
-        mmsg.mean = param[0]
-        mmsg.stddev = param[1]
+        
+        if self.buff_len > 1:
+        
+            param = norm.fit(self.heading)
+                
+            mmsg.mean = param[0]
+            mmsg.stddev = param[1]
+            
+        else:
+            
+            mmsg.mean = yaw
+            mmsg.stddev = 0.0
         
         self.pub.publish(mmsg)
         
