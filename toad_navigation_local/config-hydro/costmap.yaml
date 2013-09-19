@@ -16,7 +16,7 @@ global_costmap:
    - {name: foot,            type: "costmap_2d::FootprintLayer"}
    - {name: inflater,         type: "costmap_2d::InflationLayer"}
    - {name: road,             type: "costmap_2d::TraversabilityLayer"}
-  # - {name: road_vel,             type: "costmap_2d::TraversabilityLayer"}
+   - {name: road_vel,             type: "costmap_2d::TraversabilityLayer"}
 
   road:
   
@@ -52,7 +52,7 @@ local_costmap:
    - {name: foot,            type: "costmap_2d::FootprintLayer"}
    - {name: inflater,        type: "costmap_2d::InflationLayer"}
    - {name: road,            type: "costmap_2d::TraversabilityLayer"}
-  # - {name: road_vel,        type: "costmap_2d::TraversabilityLayer"}
+   - {name: road_vel,        type: "costmap_2d::TraversabilityLayer"}
 
   road:
   
