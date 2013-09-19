@@ -32,8 +32,10 @@
 	</node>
 	
 	<!-- Stereo (nodelets / nodes) -->
-	<include unless="$(arg stereo)" file="$(find toad_stereo)/launch/mono_nodelets.launch" />
-	<include if="$(arg stereo)" file="$(find toad_stereo)/launch/stereo_nodelets.launch" />
+	<!--include unless="$(arg stereo)" file="$(find toad_stereo)/launch/mono_nodelets.launch" />
+	<include if="$(arg stereo)" file="$(find toad_stereo)/launch/stereo_nodelets.launch" /-->
+	
+	<include file="$(find toad_bringup)/launch/kinect.launch" />
 	
 	<!-- Microstrain IMU -->
 	<include file="$(find microstrain_3dm_gx3_45)/launch/imu.launch" />

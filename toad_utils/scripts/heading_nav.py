@@ -72,11 +72,11 @@ class print_heading(object):
         # apply correction for magnetic declination
         yaw += self.declination
     
-        if yaw > 2*pi:
+        if yaw >= 2*pi:
         
             yaw -= 2*pi
             
-        if yaw < 0:
+        elif yaw < 0:
             
             yaw += 2*pi
         
