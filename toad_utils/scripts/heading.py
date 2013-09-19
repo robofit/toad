@@ -47,7 +47,8 @@ class print_heading(object):
     
         self.buff_len = rospy.get_param("~filter_len", 0)
 
-        self.declination = rospy.get_param("~declination", (3.81777/360)*2*pi) # Brno (2013)
+        #self.declination = rospy.get_param("~declination", (3.81777/360)*2*pi) # Brno (2013)
+        self.declination = rospy.get_param("~declination", (4.787222/360)*2*pi) # Lodz (2013)
         
         self.mutex = threading.Lock()
         
