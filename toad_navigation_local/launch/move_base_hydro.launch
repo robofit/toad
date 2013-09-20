@@ -5,7 +5,7 @@
 	<rosparam command="delete" param="/move_base"/>
 
 	<!--- Run move base -->
-	<node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen" respawn="true">
+	<node pkg="move_base" type="move_base" name="move_base" output="screen" respawn="true">
 
 		<param name="controller_frequency" value="5"/>
 

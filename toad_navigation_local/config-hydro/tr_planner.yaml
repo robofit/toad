@@ -22,5 +22,8 @@ sim_time: 1.7
 simple_attractor: false
 vtheta_samples: 20
 vx_samples: 8
-xy_goal_tolerance: 0.2
-yaw_goal_tolerance: 0.2
+
+xy_goal_tolerance: 0.5
+
+# we don't care about rotation...
+yaw_goal_tolerance: 3.14 # The tolerance in radians for the controller in yaw/rotation when achieving its goal
