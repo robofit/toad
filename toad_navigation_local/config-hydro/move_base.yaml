@@ -1,4 +1,6 @@
-footprint: [[0.4, 0.3], [-0.4, 0.3], [-0.4, -0.3], [0.4, -0.3]]
+footprint: [[0.45, 0.35], [-0.45, 0.35], [-0.45, -0.35], [0.45, -0.35]]
+
+planner_patience: 5.0 # How long the planner will wait in seconds in an attempt to find a valid plan before space-clearing operations are performed.
 
 controller_frequency: 5.0
 controller_patience: 15.0
@@ -8,36 +10,46 @@ oscillation_timeout: 10.0
 oscillation_distance: 0.5
 
 recovery_behaviors:
-  - name: 'super_conservative_reset'
-    type: 'clear_costmap_recovery/ClearCostmapRecovery'
-    
-  - name: 'super_conservative_reset_road'
-    type: 'clear_costmap_recovery/ClearCostmapRecovery'
-  
-  - name: 'super_conservative_reset_road_vel'
-    type: 'clear_costmap_recovery/ClearCostmapRecovery'  
-    
-  - name: 'conservative_reset'
-    type: 'clear_costmap_recovery/ClearCostmapRecovery'
-    
-  - name: 'conservative_reset_road'
-    type: 'clear_costmap_recovery/ClearCostmapRecovery'
-    
+
+  - name: 'super_conservative_reset_road_vel'              # ground map
+    type: 'clear_costmap_recovery/ClearCostmapRecovery' 
+
   - name: 'conservative_reset_road_vel'
     type: 'clear_costmap_recovery/ClearCostmapRecovery'
-    
-  - name: 'aggressive_reset'
+
+  - name: 'aggressive_reset_road_vel'
     type: 'clear_costmap_recovery/ClearCostmapRecovery'
-       
+
+  - name: 'super_aggressive_reset_road_vel'
+    type: 'clear_costmap_recovery/ClearCostmapRecovery'
+
+  - name: 'road_det_map_reset'
+    type: 'rt_recovery_behaviors/CostmapFilterRecovery'
+
+  - name: 'super_conservative_reset_road'                 # road detection
+    type: 'clear_costmap_recovery/ClearCostmapRecovery'
+ 
+  - name: 'conservative_reset_road'                       # road
+    type: 'clear_costmap_recovery/ClearCostmapRecovery'
+    
   - name: 'aggressive_reset_road'
     type: 'clear_costmap_recovery/ClearCostmapRecovery'  
     
-  - name: 'aggressive_reset_road_vel'
-    type: 'clear_costmap_recovery/ClearCostmapRecovery' 
-   
-   
-   
+  - name: 'super_aggressive_reset_road'
+    type: 'clear_costmap_recovery/ClearCostmapRecovery'
     
+  - name: 'super_conservative_reset'
+    type: 'clear_costmap_recovery/ClearCostmapRecovery'      
+    
+  - name: 'conservative_reset'
+    type: 'clear_costmap_recovery/ClearCostmapRecovery'
+        
+  - name: 'aggressive_reset'
+    type: 'clear_costmap_recovery/ClearCostmapRecovery'
+  
+  - name: 'super_aggressive_reset'
+    type: 'clear_costmap_recovery/ClearCostmapRecovery' 
+       
   #- name: 'rotate_reset'
   #  type: 'rotate_recovery/RotateRecovery'
     
@@ -46,12 +58,15 @@ recovery_behaviors:
 #    type: 'move_slow_and_clear/MoveSlowAndClear'
 
 super_conservative_reset:
-  reset_distance: 2.0
+  reset_distance: 4.0
 
 conservative_reset:
-  reset_distance: 1.0
+  reset_distance: 2.0
 
 aggressive_reset:
+  reset_distance: 1.0
+
+super_aggressive_reset:
   reset_distance: 0.0
 
 #rotate_reset:
@@ -60,28 +75,35 @@ aggressive_reset:
   
   
 super_conservative_reset_road:
-  reset_distance: 2.0
+  reset_distance: 4.0
   layer_search_string: road
   
 conservative_reset_road:
-  reset_distance: 1.0
+  reset_distance: 2.0
   layer_search_string: road
   
 aggressive_reset_road:
+  reset_distance: 1.0
+  layer_search_string: road
+  
+super_aggressive_reset_road:
   reset_distance: 0.0
   layer_search_string: road
   
   
-  
 super_conservative_reset_road_vel:
-  reset_distance: 2.0
+  reset_distance: 4.0
   layer_search_string: road_vel
   
 conservative_reset_road_vel:
-  reset_distance: 1.0
+  reset_distance: 2.0
   layer_search_string: road_vel
   
 aggressive_reset_road_vel:
+  reset_distance: 1.0
+  layer_search_string: road_vel
+
+super_aggressive_reset_road_vel:
   reset_distance: 0.0
   layer_search_string: road_vel
 
