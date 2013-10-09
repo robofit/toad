@@ -10,22 +10,28 @@ global_costmap:
   resolution: 0.05
   origin_x: 0.0
   origin_y: 0.0
-  inflation_radius: 0.7
+  inflation_radius: 0.25
   transform_tolerance: 0.5 # mainly because of testing with bagfiles
   plugins:
-   - {name: obstacles,        type: "costmap_2d::ObstacleLayer"}
+  # - {name: obstacles,        type: "costmap_2d::ObstacleLayer"}
    - {name: foot,            type: "costmap_2d::FootprintLayer"}
    - {name: inflater,         type: "costmap_2d::InflationLayer"}
-   - {name: road,             type: "costmap_2d::TraversabilityLayer"}
+   #- {name: road,             type: "costmap_2d::TraversabilityLayer"}
    - {name: road_vel,             type: "costmap_2d::TraversabilityLayer"}
 
   road:
   
     map_topic: /det2costmap/occ_map
+    inc_step: 254
+    dec_step: 254
+    unknown_dec_step: 254
     
   road_vel:
   
     map_topic: /velodyne/map2d
+    inc_step: 254
+    dec_step: 254
+    unknown_dec_step: 128
 
   obstacles:
     publish_voxel_map: false
@@ -47,22 +53,28 @@ local_costmap:
   resolution: 0.05
   origin_x: 0.0
   origin_y: 0.0
-  inflation_radius: 0.7
+  inflation_radius: 0.25
   transform_tolerance: 0.5
   plugins:
-   - {name: obstacles,       type: "costmap_2d::ObstacleLayer"}
+  # - {name: obstacles,       type: "costmap_2d::ObstacleLayer"}
    - {name: foot,            type: "costmap_2d::FootprintLayer"}
    - {name: inflater,        type: "costmap_2d::InflationLayer"}
-   - {name: road,            type: "costmap_2d::TraversabilityLayer"}
+   #- {name: road,            type: "costmap_2d::TraversabilityLayer"}
    - {name: road_vel,        type: "costmap_2d::TraversabilityLayer"}
 
   road:
   
     map_topic: /det2costmap/occ_map
+    inc_step: 254
+    dec_step: 254
+    unknown_dec_step: 254
     
   road_vel:
   
     map_topic: /velodyne/map2d
+    inc_step: 254
+    dec_step: 254
+    unknown_dec_step: 128
 
   obstacles:
     publish_voxel_map: true
