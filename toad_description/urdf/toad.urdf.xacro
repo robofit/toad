@@ -6,8 +6,8 @@
        xmlns:xacro="http://ros.org/wiki/xacro"
 name="toad">
 
-  <include filename="$(find p2os_urdf)/defs/pioneer3at_body.xacro"/>
-  <include filename="$(find toad_description)/urdf/hokuyo_utm30lx.urdf.xacro"/>
+  <xacro:include filename="$(find p2os_urdf)/defs/pioneer3at_body.xacro"/>
+  <xacro:include filename="$(find toad_description)/urdf/hokuyo_utm30lx.urdf.xacro"/>
     
   <xacro:p3at_front suffix="left" reflect="1"/>
   <xacro:p3at_front suffix="right" reflect="-1"/>
@@ -16,7 +16,7 @@ name="toad">
   <xacro:p3at_gazebo_ext/>
   
   <joint name="p3at_velodyne_joint" type="fixed">
-		<origin xyz="0.05 0 0.8" rpy="0 0 ${-90 * M_PI/180}"/>
+		<origin xyz="0 0 0.8" rpy="0 0 ${-90 * M_PI/180}"/>
 		<parent link="base_link"/>
 		<child link="velodyne"/>
 	</joint>
@@ -157,7 +157,7 @@ name="toad">
 	
 	<!-- Hokuyo UTM-30LX mounted upside down -->
 	<xacro:hokuyo_utm30lx name="hokuyo" parent="base_link" ros_topic="/scan" update_rate="10" ray_count="1080" min_angle="-135" max_angle="135">
-  	<origin xyz="0.32 0.0 0.2" rpy="${M_PI} 0 0"/>
+  	<origin xyz="0.25 0.0 0.35" rpy="0 0 0"/>
 	</xacro:hokuyo_utm30lx>
 	
 	<gazebo>
