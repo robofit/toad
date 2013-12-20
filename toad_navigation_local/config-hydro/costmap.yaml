@@ -22,10 +22,16 @@ global_costmap:
   road:
   
     map_topic: /det2costmap/occ_map
+    inc_step: 254
+    dec_step: 254
+    unknown_dec_step: 254
     
   road_vel:
   
     map_topic: /velodyne/map2d
+    inc_step: 254
+    dec_step: 254
+    unknown_dec_step: 128
 
   obstacles:
     publish_voxel_map: false
@@ -61,10 +67,16 @@ local_costmap:
   road:
   
     map_topic: /det2costmap/occ_map
+    inc_step: 254
+    dec_step: 254
+    unknown_dec_step: 254
     
   road_vel:
   
     map_topic: /velodyne/map2d
+    inc_step: 254
+    dec_step: 254
+    unknown_dec_step: 128
 
   obstacles:
     publish_voxel_map: true
