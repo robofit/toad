@@ -5,7 +5,7 @@
   <node pkg="laser_scan_matcher" type="laser_scan_matcher_node" name="laser_scan_matcher_node" output="screen">
 
     <remap from="imu" to="/imu_3dm_node/imu/data"/>
-    <remap from="scan" to="/velodyne/scan"/>
+    <remap from="scan" to="/scan"/>
     <remap from="odom" to="/odom"/>
     
     <remap from="odom_out" to="/laser_scan_matcher/odom"/>
