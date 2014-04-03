@@ -35,7 +35,7 @@ global_costmap:
 
   obstacles:
     publish_voxel_map: false
-    observation_sources: velodyne_scan hokuyo
+    observation_sources: velodyne_scan
     velodyne_scan: {clearing: false, data_type: LaserScan, marking: true, sensor_frame: velodyne,
       topic: /velodyne/scan, expected_update_rate: 0.5, observation_persistence: 0.0}
     hokuyo: {clearing: true, data_type: LaserScan, marking: true, sensor_frame: hokuyo_link,
@@ -80,7 +80,7 @@ local_costmap:
 
   obstacles:
     publish_voxel_map: true
-    observation_sources: velodyne_scan hokuyo
+    observation_sources: velodyne_scan
     velodyne_scan: {clearing: false, data_type: LaserScan, marking: true, sensor_frame: velodyne,
       topic: /velodyne/scan, expected_update_rate: 0.5, observation_persistence: 0.0}
     hokuyo: {clearing: true, data_type: LaserScan, marking: true, sensor_frame: hokuyo_link,
