@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package>
+  <name>toad_stereo</name>
+  <version>0.0.2</version>
+  <description>toad_stereo</description>
+
+  <maintainer email="imaterna@fit.vutbr.cz">Zdenek Materna</maintainer>
+
+  <license>LGPL</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  
+  <!--build_depend>camera1394</build_depend-->
+  <build_depend>stereo_image_proc</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>dynamic_reconfigure</build_depend>
+  <build_depend>pluginlib</build_depend>
+  
+  <!--run_depend>camera1394</run_depend-->
+  <run_depend>stereo_image_proc</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+  <run_depend>dynamic_reconfigure</run_depend>
+  <run_depend>pluginlib</run_depend>
+
+</package>

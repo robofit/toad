@@ -11,6 +11,8 @@
     <remap from="/toad_teleop_ps3/cmd_vel" to="/cmd_vel"/>
   </node>
 
-  <node pkg="joy" type="joy_node" name="joystick"/>
+  <node pkg="joy" type="joy_node" name="joystick">
+    <param name="dev" value="/dev/input/js1"/>
+  </node>
 
 </launch>
