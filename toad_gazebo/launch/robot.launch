@@ -13,12 +13,10 @@
   </node>
 
   <!-- is it necessary??? -->
-	<node pkg="p2os_urdf" type="publisher" name="publisher"/>
+  <node pkg="p2os_urdf" type="publisher" name="publisher"/>
   
-  <!-- start Gazebo (TODO: add arguments) -->
-  <!--include file="$(find gazebo_ros)/launch/empty_world.launch" /-->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="$(find toad_gazebo)/env/pavements.sdf"/> <!-- Note: the world_name is with respect to GAZEBO_RESOURCE_PATH environmental variable -->
+    <!--arg name="world_name" value="$(find toad_gazebo)/env/pavements.sdf"/-->
     <arg name="paused" value="false"/>
     <arg name="use_sim_time" value="true"/>
     <arg name="gui" value="true"/>
@@ -29,20 +27,20 @@
   <!-- spawn robot using urdf description -->
   <node name="spawn_robot_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model toad -Y 0.0" respawn="false" output="screen" />
   
-  <node pkg="gps_common" name="gps_to_odom" type="utm_odometry_node" output="screen">
+  <!--node pkg="gps_common" name="gps_to_odom" type="utm_odometry_node" output="screen">
     <remap from="fix" to="/imu_3dm_node/nav/fix"/>
     <remap from="odom" to="/imu_3dm_node/nav/odom"/>
     <param name="child_frame_id" value="odom"/>
-  </node>
+  </node-->
   
   <!-- robot_pose_ekf -->
-	<include file="$(find toad_bringup)/launch/robot_pose_ekf.xml">
-	  <arg name="use_imu" value="false"/> <!-- there is some issue with simulated IMU... -->
-	</include>
+  <!--include file="$(find toad_bringup)/launch/robot_pose_ekf.xml">
+    <arg name="use_imu" value="false"/>
+  </include-->
 	
-	<node name="stereo_image_proc" pkg="stereo_image_proc" type="stereo_image_proc" ns="/stereo">
-	  <param name="disparity_range" type="int" value="128"/>
+  <node name="stereo_image_proc" pkg="stereo_image_proc" type="stereo_image_proc" ns="/stereo">
+    <param name="disparity_range" type="int" value="128"/>
     <param name="approximate_sync" type="bool" value="false"/>
-	</node>
+  </node>
   
 </launch>
