@@ -3,21 +3,6 @@
 
 	<!--delete old parameters -->
 	<rosparam command="delete" param="/move_base"/>
-
-	<!--- Run move base -->
-	<node pkg="move_base" type="move_base" name="move_base" output="screen" respawn="true">
-
-		<param name="controller_frequency" value="5"/>
-
-    <param name="base_global_planner" value="navfn/NavfnROS"/>
-    <param name="base_local_planner" value="base_local_planner/TrajectoryPlannerROS" />
-    
-    <rosparam file="$(find toad_navigation_global)/config/navfn.yaml" command="load" ns="NavfnROS" />
-    <rosparam file="$(find toad_navigation_global)/config/tr_planner.yaml" command="load" ns="TrajectoryPlannerROS" />
-		<!--- load parameters -->
-		<rosparam file="$(find toad_navigation_global)/config/move_base.yaml" command="load" />
-		<rosparam file="$(find toad_navigation_global)/config/costmap.yaml" command="load" />
-	</node>
 	
   <node pkg="move_base" type="move_base" name="move_base_node" output="screen">
 
