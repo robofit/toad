@@ -1,6 +1,8 @@
 toad
 ====
 
+This README is obsolete and should be updated!!!
+
 ROS packages modified for our Toad outdoor robot based on Pioneer 3-AT platform
 
 
